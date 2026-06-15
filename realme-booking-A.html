@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>예약하기 — REAL ME</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,700;1,400&family=Nanum+Square+Neo:wght@300;400;700;800&display=swap" rel="stylesheet">
+<script src="//lite.payapp.kr/public/api/v2/payapp-lite.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TYWS49LKCM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TYWS49LKCM');
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5GL4L82H');</script>
+<!-- End Google Tag Manager -->
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '468864818533646');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=468864818533646&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<style>
+:root {
+  --black: #1A1A1A;
+  --black-surface: #242424;
+  --black-card: #2E2E2E;
+  --olive: #7A8C4E;
+  --olive-light: #A8BC6E;
+  --olive-dim: rgba(122,140,78,0.15);
+  --olive-border: rgba(122,140,78,0.35);
+  --white: #FFFFFF;
+  --white-70: rgba(255,255,255,0.7);
+  --white-40: rgba(255,255,255,0.4);
+  --white-15: rgba(255,255,255,0.15);
+  --white-08: rgba(255,255,255,0.08);
+  --font-logo: 'Libre Bodoni', serif;
+  --font-body: 'Nanum Square Neo', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(26,26,26,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid var(--white-15);
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+.nav-logo {
+  font-family: var(--font-logo);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--white);
+  text-decoration: none;
+}
+
+/* ── LAYOUT ── */
+.page-wrap {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+/* ── PAGE HEADER ── */
+.page-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--olive-light);
+  margin-bottom: 10px;
+}
+.page-title {
+  font-family: var(--font-logo);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+.page-sub {
+  font-size: 13px;
+  color: var(--white-70);
+  margin-bottom: 36px;
+  line-height: 1.7;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  border: none;
+  border-top: 0.5px solid var(--white-15);
+  margin: 32px 0;
+}
+
+/* ── 상품 소개 ── */
+.plans-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--white-40);
+  margin-bottom: 14px;
+}
+
+.plan-entry {
+  padding: 16px 0;
+  border-bottom: 0.5px solid var(--white-08);
+}
+.plan-entry:last-child { border-bottom: none; }
+
+.plan-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.plan-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: 0.04em;
+}
+.plan-name .plan-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 20px;
+  background: var(--olive);
+  color: var(--white);
+  margin-left: 7px;
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+.plan-duration {
+  font-size: 12px;
+  color: var(--white-40);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.plan-desc {
+  font-size: 13px;
+  color: var(--white-70);
+  line-height: 1.8;
+}
+.plan-desc span {
+  display: block;
+  padding-left: 0;
+}
+.plan-desc span::before {
+  content: "✔ ";
+  color: var(--olive-light);
+  font-size: 11px;
+}
+
+/* 진단 강조 카드 */
+.plan-diagnosis {
+  background: var(--olive-dim);
+  border: 0.5px solid var(--olive-border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 4px;
+}
+.plan-diagnosis .plan-name { color: var(--olive-light); }
+
+/* ── 안내 박스 ── */
+.info-box {
+  background: var(--black-card);
+  border: 0.5px solid var(--white-15);
+  border-radius: 10px;
+  padding: 16px 18px;
+  font-size: 13px;
+  color: var(--white-70);
+  line-height: 1.9;
+  margin-top: 20px;
+}
+.info-box strong {
+  color: var(--white);
+  font-weight: 700;
+}
+.info-box .info-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.info-box .info-row + .info-row { margin-top: 8px; }
+.info-icon { flex-shrink: 0; font-size: 14px; margin-top: 2px; }
+
+/* ── 예약금 안내 ── */
+.deposit-banner {
+  background: linear-gradient(135deg, rgba(122,140,78,0.18) 0%, rgba(122,140,78,0.06) 100%);
+  border: 0.5px solid var(--olive-border);
+  border-radius: 12px;
+  padding: 20px 20px;
+  margin-top: 20px;
+}
+.deposit-amount {
+  font-family: var(--font-logo);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--olive-light);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.deposit-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white-40);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.deposit-desc {
+  font-size: 13px;
+  color: var(--white-70);
+  line-height: 1.8;
+}
+
+/* ── 폼 ── */
+.form-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--white-40);
+  margin-bottom: 16px;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white-70);
+  margin-bottom: 7px;
+  letter-spacing: 0.04em;
+}
+.form-input {
+  width: 100%;
+  background: var(--black-surface);
+  border: 0.5px solid var(--white-15);
+  border-radius: 8px;
+  padding: 13px 16px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--white);
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+.form-input::placeholder { color: var(--white-40); }
+.form-input:focus {
+  border-color: var(--olive);
+  background: rgba(26,26,26,0.95);
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* ── 동의 체크박스 ── */
+.consent-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 6px;
+  cursor: pointer;
+}
+.consent-wrap input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--olive);
+  flex-shrink: 0;
+  margin-top: 3px;
+  cursor: pointer;
+}
+.consent-text {
+  font-size: 12px;
+  color: var(--white-70);
+  line-height: 1.6;
+}
+.consent-text a {
+  color: var(--olive-light);
+  text-decoration: underline;
+}
+
+/* ── 버튼 ── */
+.btn-reserve {
+  display: block;
+  width: 100%;
+  background: var(--olive);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  padding: 17px 32px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  margin-top: 20px;
+  letter-spacing: 0.02em;
+}
+.btn-reserve:hover { background: var(--olive-light); transform: translateY(-1px); }
+.btn-reserve:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn-sub-note {
+  text-align: center;
+  font-size: 12px;
+  color: var(--white-40);
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+/* ── 에러 메시지 ── */
+.error-msg {
+  font-size: 12px;
+  color: #F08080;
+  margin-top: 5px;
+  display: none;
+}
+.error-msg.show { display: block; }
+
+/* ── 로딩 스피너 ── */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* ── 주의사항 ── */
+.caution-list {
+  list-style: none;
+  font-size: 12px;
+  color: var(--white-40);
+  line-height: 1.9;
+}
+.caution-list li::before {
+  content: "* ";
+  color: var(--olive);
+}
+
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5GL4L82H"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<nav>
+  <a href="/" class="nav-logo">REAL ME</a>
+</nav>
+
+<div class="page-wrap">
+
+  <!-- 헤더 -->
+  <p class="page-eyebrow">서비스 소개 & 예약</p>
+  <h1 class="page-title">처음 방문이라면,<br>여기서 시작하세요.</h1>
+  <p class="page-sub">얼굴형·체형·피부톤 정밀 분석부터 실제 스타일링 완성까지,<br>당신에게 맞는 플랜을 선택하세요.</p>
+
+  <!-- 상품 소개 -->
+  <p class="plans-label">Service Plans</p>
+
+  <div class="plan-diagnosis plan-entry">
+    <div class="plan-top">
+      <span class="plan-name">Diagnosis<span class="plan-badge">첫 방문 필수</span></span>
+      <span class="plan-duration">30분 · 55,000원</span>
+    </div>
+    <div class="plan-desc">
+      <span>얼굴형·체형·피부톤 정밀 분석</span>
+      <span>내 강점과 보완점 파악</span>
+      <span>진단 결과 리포트 제공</span>
+    </div>
+  </div>
+
+  <div class="plan-entry">
+    <div class="plan-top">
+      <span class="plan-name">Plus</span>
+      <span class="plan-duration">1시간</span>
+    </div>
+    <div class="plan-desc">
+      <span>실제로 달라지고 싶은 분을 위한 첫 단계</span>
+      <span>쇼룸 실착 코디 피팅</span>
+      <span>상의 2개 증정</span>
+    </div>
+  </div>
+
+  <div class="plan-entry">
+    <div class="plan-top">
+      <span class="plan-name">Standard<span class="plan-badge" style="background:#3B6D11;">인기</span></span>
+      <span class="plan-duration">2시간 30분</span>
+    </div>
+    <div class="plan-desc">
+      <span>스타일링 완성 + 프로필 사진 촬영</span>
+      <span>쇼룸 실착 코디</span>
+      <span>의상 3벌 증정 + 사진 촬영·보정</span>
+    </div>
+  </div>
+
+  <div class="plan-entry">
+    <div class="plan-top">
+      <span class="plan-name">Premium</span>
+      <span class="plan-duration">3시간</span>
+    </div>
+    <div class="plan-desc">
+      <span>가장 완성도 높은 변화를 원하는 분</span>
+      <span>스타일링 완성 + 프로필 사진 촬영</span>
+      <span>의상 4벌 증정 + 쇼핑 적립금 지급</span>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <div class="info-row">
+      <span class="info-icon">📌</span>
+      <span>모든 플랜은 <strong>진단(55,000원)</strong> 이후 진행됩니다</span>
+    </div>
+    <div class="info-row">
+      <span class="info-icon">💬</span>
+      <span>카카오채널 친구추가 시 <strong>5,000원 할인</strong></span>
+    </div>
+    <div class="info-row">
+      <span class="info-icon">⭐</span>
+      <span>평일 예약 시 <strong>수석 디렉터</strong> 진행 <strong style="color:var(--olive-light);">(현재 평일만 예약 가능)</strong></span>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 예약금 안내 -->
+  <div class="deposit-banner">
+    <div class="deposit-label">Reservation Deposit</div>
+    <div class="deposit-amount">40,000원</div>
+    <div class="deposit-desc">
+      예약금 결제 후 리얼미 카카오채널 <strong>(@real_me)</strong>로<br>
+      사전질의서 링크가 자동으로 전달됩니다.<br>
+      사전질의서에서 방문 희망 일정을 선택하시면 예약이 완료됩니다.<br><br>
+      <strong style="color:var(--olive-light);">⚠ 현재 평일(월~금)만 예약 가능합니다.</strong>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 예약 폼 -->
+  <p class="form-section-label">예약자 정보 입력</p>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label" for="input-name">이름</label>
+      <input class="form-input" type="text" id="input-name" placeholder="홍길동" autocomplete="name" inputmode="text">
+      <p class="error-msg" id="err-name">이름을 입력해주세요</p>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="input-age">나이</label>
+      <input class="form-input" type="number" id="input-age" placeholder="28" min="15" max="80" inputmode="numeric">
+      <p class="error-msg" id="err-age">나이를 입력해주세요</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label" for="input-phone">연락처</label>
+    <input class="form-input" type="tel" id="input-phone" placeholder="010-1234-5678" autocomplete="tel" inputmode="tel">
+    <p class="error-msg" id="err-phone">올바른 연락처를 입력해주세요</p>
+  </div>
+
+  <label class="consent-wrap" for="input-consent">
+    <input type="checkbox" id="input-consent">
+    <span class="consent-text">
+      예약금 환불은 <strong style="color:var(--white);">방문 3일 전까지</strong> 가능하며, 이후에는 환불이 어렵습니다.<br>
+      사전질의서 미제출 시 서비스 진행이 어렵습니다.
+    </span>
+  </label>
+  <p class="error-msg" id="err-consent">안내 사항에 동의해주세요</p>
+
+  <!-- 예약하기 버튼 -->
+  <button class="btn-reserve" id="btn-reserve" type="button">
+    예약금 40,000원 결제하기 →
+  </button>
+  <p class="btn-sub-note">결제 후 카카오톡으로 사전질의서 링크가 발송됩니다</p>
+
+  <hr class="divider">
+
+  <ul class="caution-list">
+    <li>예약금은 서비스 이용 금액에서 차감됩니다</li>
+    <li>방문 3일 전까지 취소 시 전액 환불, 이후 환불 불가</li>
+    <li>사전질의서 링크를 받지 못한 경우 @real_me 채널로 문의</li>
+    <li>예약금 결제 완료 후 사전질의서 링크 발송까지 최대 10분 소요</li>
+  </ul>
+
+</div>
+
+<script>
+// ── 페이앱 LITE 초기화 ──────────────────────────────────────
+window.addEventListener('load', function() {
+  if (typeof PayApp === 'undefined') {
+    console.error('페이앱 SDK 로드 실패');
+    return;
+  }
+  PayApp.setDefault('userid',   'cyrano1030');
+  PayApp.setDefault('shopname', '리얼미');
+});
+
+// ── UTM 파라미터 → inflow_channel ──────────────────────────
+function getInflowChannel() {
+  const utm = new URLSearchParams(window.location.search).get('utm_source') || '';
+  const map = {
+    instagram: 'sns', youtube: 'sns', facebook: 'sns',
+    blog: 'blog', naver: 'blog', naver_blog: 'blog',
+    referral: 'referral', homepage: 'homepage',
+  };
+  return map[utm.toLowerCase()] || 'sns';
+}
+
+// ── 연락처 자동 하이픈 ──────────────────────────────────────
+document.getElementById('input-phone').addEventListener('input', function(e) {
+  let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+  if (v.length > 7)      v = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7);
+  else if (v.length > 3) v = v.slice(0,3) + '-' + v.slice(3);
+  e.target.value = v;
+});
+
+// ── 유효성 검사 ────────────────────────────────────────────
+function showError(id, show) {
+  const el = document.getElementById(id);
+  el.classList.toggle('show', show);
+}
+
+function validate() {
+  const name    = document.getElementById('input-name').value.trim();
+  const age     = document.getElementById('input-age').value.trim();
+  const phone   = document.getElementById('input-phone').value.trim().replace(/-/g, '');
+  const consent = document.getElementById('input-consent').checked;
+
+  let valid = true;
+
+  if (!name) { showError('err-name', true); valid = false; }
+  else showError('err-name', false);
+
+  if (!age || isNaN(age) || age < 15 || age > 80) { showError('err-age', true); valid = false; }
+  else showError('err-age', false);
+
+  if (!/^01[0-9]{8,9}$/.test(phone)) { showError('err-phone', true); valid = false; }
+  else showError('err-phone', false);
+
+  if (!consent) { showError('err-consent', true); valid = false; }
+  else showError('err-consent', false);
+
+  return valid;
+}
+
+// ── 예약하기 버튼 ──────────────────────────────────────────
+document.getElementById('btn-reserve').addEventListener('click', function() {
+  if (!validate()) return;
+
+  // ── 전환 이벤트 트래킹 ──
+  if (typeof fbq === 'function') fbq('track', 'InitiateCheckout', { value: 40000, currency: 'KRW' });
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: 'begin_checkout', value: 40000, currency: 'KRW' });
+
+  const name  = document.getElementById('input-name').value.trim();
+  const age   = document.getElementById('input-age').value.trim();
+  const phone = document.getElementById('input-phone').value.trim().replace(/-/g, '');
+  const inflow = getInflowChannel();
+
+  const btn = document.getElementById('btn-reserve');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>결제창 연결 중...';
+
+  try {
+    PayApp.setParam('goodname',    '리얼미 퍼스널 스타일링 예약금');
+    PayApp.setParam('price',       '40000');
+    PayApp.setParam('recvphone',   phone);
+    PayApp.setParam('feedbackurl', 'https://npjudvehidwjofnmsdos.supabase.co/functions/v1/payapp-feedback');
+    PayApp.setParam('returnurl',   'https://find-me.real-me.co.kr/');
+    PayApp.setParam('smsuse',      'n');
+    PayApp.setParam('redirectpay', '1');   // 바로 결제창 이동
+    PayApp.setParam('skip_cstpage','y');
+    PayApp.setParam('checkretry',  'y');   // 콜백 실패 시 최대 10회 재시도
+    // var1, var2 — feedbackurl 콜백에서 그대로 돌아옴
+    PayApp.setParam('var1', name + '|' + age);  // 이름|나이 묶어서 전달
+    PayApp.setParam('var2', inflow + '|landing_a');
+
+    PayApp.call();
+  } catch(e) {
+    console.error(e);
+    alert('결제창 연결 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+  } finally {
+    // redirectpay=1이면 페이지가 이동하므로 실제로는 여기 도달 안 함
+    // 오류 시를 위한 복구
+    setTimeout(function() {
+      btn.disabled = false;
+      btn.innerHTML = '예약금 40,000원 결제하기 →';
+    }, 3000);
+  }
+});
+</script>
+
+</body>
+</html>
