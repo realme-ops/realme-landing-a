@@ -81,7 +81,7 @@ nav {
   padding: 0 5%;
   display: flex;
   align-items: center;
-  height: 60px;
+  height: 72px;
 }
 .nav-logo {
   font-family: var(--font-logo);
@@ -92,7 +92,7 @@ nav {
   text-decoration: none;
 }
 .nav-logo-img {
-  height: 26px;
+  height: 48px;
   width: auto;
   display: block;
   border-radius: 4px;
@@ -631,14 +631,37 @@ window.addEventListener('load', function() {
 });
 
 // ── UTM 파라미터 → inflow_channel ──────────────────────────
+// 정책: utm_source 원본을 그대로 기록한다 (threads / blog / instagram 각각 구분).
+// 첫 방문 UTM을 sessionStorage에 저장 → 새로고침·페이지이동에도 유지된다.
 function getInflowChannel() {
-  const utm = new URLSearchParams(window.location.search).get('utm_source') || '';
-  const map = {
-    instagram: 'sns', youtube: 'sns', facebook: 'sns',
-    blog: 'blog', naver: 'blog', naver_blog: 'blog',
-    referral: 'referral', homepage: 'homepage',
-  };
-  return map[utm.toLowerCase()] || 'sns';
+  const params = new URLSearchParams(window.location.search);
+  let src = (params.get('utm_source') || '').toLowerCase().trim();
+
+  // 1) 이번 방문 주소에 utm_source가 있으면 그 값을 세션에 저장
+  if (src) {
+    try { sessionStorage.setItem('realme_utm_source', src); } catch(e) {}
+  } else {
+    // 2) 주소에 없으면, 같은 방문(세션) 안에서 이전에 저장해둔 값을 재사용
+    try { src = sessionStorage.getItem('realme_utm_source') || ''; } catch(e) {}
+  }
+
+  // 3) 그래도 없으면 referrer로 직접유입/자연유입을 구분 (sns로 오염시키지 않음)
+  if (!src) {
+    const ref = (document.referrer || '').toLowerCase();
+    if (!ref)                              src = 'direct';        // 주소 직접 입력 / 앱
+    else if (ref.indexOf('threads.') > -1) src = 'threads';
+    else if (ref.indexOf('instagram.') > -1) src = 'instagram';
+    else if (ref.indexOf('naver.') > -1)   src = 'naver';
+    else if (ref.indexOf('google.') > -1)  src = 'google';
+    else if (ref.indexOf('youtube.') > -1) src = 'youtube';
+    else if (ref.indexOf('real-me.co.kr') > -1) {
+      // 내부 페이지(소개 랜딩)에서 넘어온 경우 — 저장값이 우선이지만 안전망
+      src = (function(){ try { return sessionStorage.getItem('realme_utm_source') || 'internal'; } catch(e){ return 'internal'; } })();
+    }
+    else                                   src = 'referral';     // 그 외 외부 사이트
+  }
+
+  return src;  // 원본 값 그대로 (예: threads, blog, instagram, naver, direct ...)
 }
 
 // ── 연락처 자동 하이픈 ──────────────────────────────────────

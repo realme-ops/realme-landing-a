@@ -83,7 +83,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 60px;
+  height: 72px;
 }
 
 .nav-logo {
@@ -95,7 +95,7 @@ nav {
   text-decoration: none;
 }
 .nav-logo-img {
-  height: 26px;
+  height: 48px;
   width: auto;
   display: block;
   border-radius: 4px;
@@ -1657,5 +1657,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
+<script>
+/* ── UTM 전달기: 소개 랜딩 → 예약 페이지로 유입정보 넘기기 ──
+   스레드/블로그 등에서 ?utm_source=...로 들어오면,
+   예약 페이지(realme-booking-A.html) 링크 뒤에 그대로 이어붙인다.
+   UTM이 없으면 referrer로 유입처를 추정해 utm_source를 만들어준다. */
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    // 1) 이번 방문의 UTM 파라미터 확보 (없으면 referrer로 추정)
+    var search = window.location.search;
+    var params = new URLSearchParams(search);
+
+    if (!params.get('utm_source')) {
+      var ref = (document.referrer || '').toLowerCase();
+      var guessed = '';
+      if (!ref)                                guessed = 'direct';
+      else if (ref.indexOf('threads.') > -1)   guessed = 'threads';
+      else if (ref.indexOf('instagram.') > -1) guessed = 'instagram';
+      else if (ref.indexOf('naver.') > -1)     guessed = 'naver';
+      else if (ref.indexOf('google.') > -1)    guessed = 'google';
+      else if (ref.indexOf('youtube.') > -1)   guessed = 'youtube';
+      else if (ref.indexOf('real-me.co.kr') > -1) guessed = ''; // 내부 이동은 건드리지 않음
+      else                                     guessed = 'referral';
+      if (guessed) params.set('utm_source', guessed);
+    }
+
+    var query = params.toString(); // "utm_source=threads&utm_medium=social..."
+    if (!query) return;
+
+    // 2) 예약 페이지로 가는 모든 링크 뒤에 UTM을 이어붙임
+    var links = document.querySelectorAll('a[href*="realme-booking-A.html"]');
+    links.forEach(function(a) {
+      var href = a.getAttribute('href');
+      if (href.indexOf('utm_source') > -1) return; // 이미 붙어있으면 건너뜀
+      a.setAttribute('href', href + (href.indexOf('?') > -1 ? '&' : '?') + query);
+    });
+  });
+})();
+</script>
 </body>
 </html>
