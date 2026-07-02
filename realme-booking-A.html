@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>예약하기 — REAL ME</title>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,700;1,400&family=Nanum+Square+Neo:wght@300;400;700;800&display=swap" rel="stylesheet">
-<script src="//lite.payapp.kr/public/api/v2/payapp-lite.js"></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-TYWS49LKCM"></script>
 <script>
@@ -608,7 +607,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="deposit-amount">20,000원</div>
     <div class="deposit-desc">
       예약금 결제 후 리얼미 카카오채널 <strong>(@real_me)</strong>로<br>
-      사전질의서 링크가 자동으로 전달됩니다.<br>
+      사전질의서 링크가 영업일 기준 순차적으로 전달됩니다.<br>
       사전질의서에서 방문 희망 일정을 선택하시면 예약이 완료됩니다.<br><br>
       <strong style="color:var(--olive-light);">🔥 주말 예약 마감!! 현재 평일(월~금)만 예약 가능합니다.</strong>
     </div>
@@ -667,7 +666,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li>예약금은 서비스 이용 금액에서 차감됩니다</li>
     <li>방문 3일 전까지 취소 시 전액 환불, 이후 환불 불가</li>
     <li>사전질의서 링크를 받지 못한 경우 @real_me 채널로 문의</li>
-    <li>예약금 결제 완료 후 사전질의서 링크 발송까지 최대 10분 소요</li>
+    <li>예약금 결제 완료 후 영업일 기준 순차적으로 사전질의서 링크가 발송됩니다</li>
   </ul>
 
 </div>
@@ -684,15 +683,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <script>
-// ── 페이앱 LITE 초기화 ──────────────────────────────────────
-window.addEventListener('load', function() {
-  if (typeof PayApp === 'undefined') {
-    console.error('페이앱 SDK 로드 실패');
-    return;
-  }
-  PayApp.setDefault('userid',   'cyrano1030');
-  PayApp.setDefault('shopname', '리얼미');
-});
+// ── 페이앱 결제 링크 ────────────────────────────────────────
+// SDK(PayApp.call) 방식에서 결제 링크 방식으로 변경 (2026-07-02)
+// 주의: 링크 방식은 var1/var2(이름|나이, 유입경로)가 콜백으로 전달되지 않음
+const PAYAPP_LINK = 'https://www.payapp.kr/L/z4gyb4';
 
 // ── UTM 파라미터 → inflow_channel ──────────────────────────
 function getInflowChannel() {
@@ -796,32 +790,14 @@ document.getElementById('btn-reserve').addEventListener('click', function() {
     console.error('lead-capture 실패', e);
   }
 
-  try {
-    PayApp.setParam('goodname',    '리얼미 퍼스널 스타일링 예약금');
-    PayApp.setParam('price',       '20000');
-    PayApp.setParam('recvphone',   phone);
-    PayApp.setParam('feedbackurl', 'https://npjudvehidwjofnmsdos.supabase.co/functions/v1/payapp-feedback');
-    PayApp.setParam('returnurl',   'https://find-me.real-me.co.kr/');
-    PayApp.setParam('smsuse',      'n');
-    PayApp.setParam('redirectpay', '1');   // 바로 결제창 이동
-    PayApp.setParam('skip_cstpage','y');
-    PayApp.setParam('checkretry',  'y');   // 콜백 실패 시 최대 10회 재시도
-    // var1, var2 — feedbackurl 콜백에서 그대로 돌아옴
-    PayApp.setParam('var1', name + '|' + age);  // 이름|나이 묶어서 전달
-    PayApp.setParam('var2', inflow + '|landing_a');
+  // 결제 링크로 이동 (시트 전송 beacon이 나가도록 현재 탭에서 이동)
+  window.location.href = PAYAPP_LINK;
 
-    PayApp.call();
-  } catch(e) {
-    console.error(e);
-    alert('결제창 연결 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-  } finally {
-    // redirectpay=1이면 페이지가 이동하므로 실제로는 여기 도달 안 함
-    // 오류 시를 위한 복구
-    setTimeout(function() {
-      btn.disabled = false;
-      btn.innerHTML = '예약금 20,000원 결제하기 →';
-    }, 3000);
-  }
+  // 뒤로가기 등으로 돌아온 경우를 위한 버튼 복구
+  setTimeout(function() {
+    btn.disabled = false;
+    btn.innerHTML = '예약금 20,000원 결제하기 →';
+  }, 3000);
 });
 
 // ── 플로팅 바 클릭 트래킹 ──────────────────────────────────
