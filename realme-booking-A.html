@@ -455,6 +455,71 @@ nav {
   color: var(--olive);
 }
 
+/* ── 하단 고정 플로팅 바 ── */
+body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
+#booking-form { scroll-margin-top: 76px; }
+
+.floating-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  background: rgba(252,252,253,0.94);
+  backdrop-filter: blur(12px);
+  border-top: 0.5px solid var(--white-15);
+}
+.floating-bar-inner {
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+}
+.float-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s, background 0.2s;
+  white-space: nowrap;
+}
+.float-btn:active { transform: scale(0.97); }
+.float-kakao {
+  position: relative;
+  flex: 0 0 42%;
+  background: #FAE100;
+  color: #3C1E1E;
+}
+.kakao-discount-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 9px;
+  border-radius: 20px;
+  background: #D64545;
+  color: #fff;
+  box-shadow: 0 1px 4px rgba(214,69,69,0.35);
+}
+.float-reserve {
+  flex: 1;
+  background: var(--olive);
+  color: var(--cream);
+}
+.float-reserve:hover { background: var(--olive-light); }
+
 </style>
 </head>
 <body>
@@ -472,7 +537,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- 헤더 -->
   <p class="page-eyebrow">서비스 소개 & 예약</p>
   <h1 class="page-title">처음 방문이라면,<br>여기서 시작하세요.</h1>
-  <p class="page-sub">얼굴형·체형·피부톤 정밀 분석부터 실제 스타일링 완성까지,<br>당신에게 맞는 플랜을 선택하세요.</p>
+  <p class="page-sub">얼굴형·체형·피부톤 정밀 분석부터 실제 스타일링 완성까지,<br>당신에게 맞는 플랜을 선택하세요.<br>
+  <strong style="color:var(--olive-light); font-weight:800;">예약금 20,000원으로 예약 · 잔금은 방문 시</strong></p>
 
   <!-- 상품 소개 -->
   <p class="plans-label">Service Plans</p>
@@ -551,7 +617,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <hr class="divider">
 
   <!-- 예약 폼 -->
-  <p class="form-section-label">예약자 정보 입력</p>
+  <p class="form-section-label" id="booking-form">예약자 정보 입력</p>
 
   <div class="form-row">
     <div class="form-group">
@@ -604,6 +670,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li>예약금 결제 완료 후 사전질의서 링크 발송까지 최대 10분 소요</li>
   </ul>
 
+</div>
+
+<!-- 하단 고정 플로팅 바 -->
+<div class="floating-bar">
+  <div class="floating-bar-inner">
+    <a class="float-btn float-kakao" id="float-kakao" href="https://pf.kakao.com/_USPdX/chat" target="_blank" rel="noopener">
+      <span class="kakao-discount-badge">친구추가 시 5,000원 할인</span>
+      💬 카카오 문의
+    </a>
+    <button class="float-btn float-reserve" id="float-reserve" type="button">2만원으로 예약하기</button>
+  </div>
 </div>
 
 <script>
@@ -745,6 +822,21 @@ document.getElementById('btn-reserve').addEventListener('click', function() {
       btn.innerHTML = '예약금 20,000원 결제하기 →';
     }, 3000);
   }
+});
+
+// ── 플로팅 바 클릭 트래킹 ──────────────────────────────────
+// 카카오 문의 버튼 (GTM: floating_kakao_click / Meta: Contact)
+document.getElementById('float-kakao').addEventListener('click', function() {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: 'floating_kakao_click', cta_location: 'floating_bar' });
+  if (typeof fbq === 'function') fbq('track', 'Contact');
+});
+
+// 2만원으로 예약하기 버튼 (GTM: floating_reserve_click) → 폼으로 스크롤
+document.getElementById('float-reserve').addEventListener('click', function() {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: 'floating_reserve_click', cta_location: 'floating_bar' });
+  document.getElementById('booking-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 </script>
 
