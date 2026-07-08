@@ -1058,6 +1058,25 @@ html, body { overflow-x: hidden; }
   .pricing-banner-text { font-size: 12px; }
   .section-title { font-size: 21px; }
 }
+
+/* ── 하단 고정 플로팅 바 ── */
+body { padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
+.floating-bar { position: fixed; left:0; right:0; bottom:0; z-index:200;
+  background: rgba(252,252,253,0.94); backdrop-filter: blur(12px);
+  border-top: 0.5px solid var(--white-15); }
+.floating-bar-inner { max-width: 480px; margin: 0 auto; display:flex; gap:8px;
+  padding: 14px 16px calc(14px + env(safe-area-inset-bottom)); }
+.float-btn { display:flex; align-items:center; justify-content:center; border:none;
+  border-radius:10px; padding:18px 8px; font-family: var(--font-body); font-size:14px;
+  font-weight:800; letter-spacing:0; cursor:pointer; text-decoration:none; line-height:1.2;
+  transition: transform .15s, background .2s; white-space:nowrap; }
+.float-btn:active { transform: scale(0.97); }
+.float-reserve { flex:1; background: var(--olive); color: var(--cream); }
+.float-reserve:hover { background: var(--olive-light); }
+.float-review { position:relative; flex:0 0 40%; background:#03C75A; color:#fff; }
+.review-count-badge { position:absolute; top:-10px; left:50%; transform:translateX(-50%);
+  white-space:nowrap; font-size:10px; font-weight:800; padding:2px 9px; border-radius:20px;
+  background:#D64545; color:#fff; box-shadow:0 1px 4px rgba(214,69,69,0.35); }
 </style>
 </head>
 <body>
@@ -1107,7 +1126,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div style="display:flex; flex-direction:column; align-items:center; gap:14px; margin-bottom:24px;">
       <div class="open-badge" style="margin-bottom:0;">
         <span class="open-badge-sm">서울 송파 리얼미 본점 오픈 기념</span>
-        50% 할인
+        63% 할인
       </div>
       <div class="urg-plain">🔥 주말 예약 마감 — 평일만 예약 가능</div>
 
@@ -1133,7 +1152,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <div style="text-align:center; margin:32px 0 16px;">
-    <a href="https://find-me.real-me.co.kr/realme-booking-A.html" class="btn-primary" style="max-width:400px; margin-top:0;" onclick="fbq('track', 'Lead'); gtag('event', 'booking_click', {event_category: 'CTA', event_label: 'hero'});">스타일 바꾸고 나도 느좋남으로 변신하기 →</a>
+    <a href="https://find-me.real-me.co.kr/realme-booking-A.html" class="btn-primary" style="max-width:400px; margin-top:0;" onclick="fbq('track', 'Lead'); gtag('event', 'booking_click', {event_category: 'CTA', event_label: 'hero'});">느좋남으로 스타일변경 신청하기 →</a>
   </div>
 
   <!-- 비포애프터 슬라이더 -->
@@ -1571,6 +1590,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
   <button type="button" class="btn-ghost reviews-more-btn" onclick="this.previousElementSibling.classList.add('expanded'); this.style.display='none';">더보기 +</button>
+  <div style="text-align:center; margin-top:28px;">
+    <a href="https://m.place.naver.com/place/2038540718/review/visitor" target="_blank" rel="noopener" id="naver-review-link"
+       style="display:inline-flex; align-items:center; gap:8px; background:#03C75A; color:#fff; font-weight:800; font-size:15px; text-decoration:none; padding:15px 28px; border-radius:10px; box-shadow:0 4px 14px rgba(3,199,90,0.25);"
+       onclick="window.dataLayer=window.dataLayer||[]; window.dataLayer.push({event:'naver_review_click', cta_location:'reviews_section'}); if(typeof fbq==='function') fbq('track','ViewContent',{content_name:'naver_reviews'});">
+      <span style="background:#fff; color:#03C75A; font-weight:900; border-radius:5px; padding:1px 7px; font-size:14px;">N</span>
+      네이버 실사진 후기 80개+ 직접 보기 →
+    </a>
+  </div>
 </section>
 
 <!-- 07 PRICING -->
@@ -1587,8 +1614,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="weekday-tag">★ 첫 방문 필수!</div>
       <div class="price-tag">파인딩 플랜 (30분)</div>
       <div style="font-size:13px; margin:4px 0 2px;">
-        <span style="text-decoration:line-through; color:var(--white-40);">110,000원</span>
-        <span style="color:var(--olive-light); font-weight:800; margin-left:6px;">50% 할인 55,000원</span>
+        <span style="text-decoration:line-through; color:var(--white-40);">150,000원</span>
+        <span style="color:var(--olive-light); font-weight:800; margin-left:6px;">63% 할인 55,000원</span>
       </div>
       <hr class="price-divider">
       <div class="price-desc" style="font-size:13px; line-height:2.2;">
@@ -1635,7 +1662,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 class="final-cta-title">바뀐 내 모습,<br>주변에서 먼저 반응해요</h2>
   <p class="final-cta-sub">2,000명이 먼저 경험했습니다</p>
 
-  <a href="https://find-me.real-me.co.kr/realme-booking-A.html" class="final-cta-btn" onclick="fbq('track', 'Lead'); gtag('event', 'booking_click', {event_category: 'CTA', event_label: 'final_cta'});">스타일 바꾸고 나도 느좋남으로 변신하기 →</a>
+  <a href="https://find-me.real-me.co.kr/realme-booking-A.html" class="final-cta-btn" onclick="fbq('track', 'Lead'); gtag('event', 'booking_click', {event_category: 'CTA', event_label: 'final_cta'});">느좋남으로 스타일변경 신청하기 →</a>
   <div style="font-size:14px; font-weight:800; color:#9A2A2A; margin-top:14px;">🔥 평일 잔여석 소진 중 — 지금 예약하세요</div>
 </section>
 
@@ -1656,6 +1683,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     주소: 서울특별시 구로구 디지털로 31길 62, 1502호
   </div>
 </footer>
+
+<!-- 하단 고정 플로팅 바 -->
+<div class="floating-bar">
+  <div class="floating-bar-inner">
+    <a class="float-btn float-review" id="float-review" href="https://m.place.naver.com/place/2038540718/review/visitor" target="_blank" rel="noopener">
+      <span class="review-count-badge">실사진 후기 80개+</span>
+      ⭐ 네이버 후기
+    </a>
+    <a class="float-btn float-reserve" id="float-reserve" href="https://find-me.real-me.co.kr/realme-booking-A.html">느좋남으로 스타일변경 신청하기</a>
+  </div>
+</div>
+
+<script>
+// ── 플로팅 바 클릭 트래킹 ──
+document.getElementById('float-review').addEventListener('click', function() {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: 'floating_review_click', cta_location: 'floating_bar' });
+  if (typeof fbq === 'function') fbq('track', 'ViewContent', { content_name: 'naver_reviews' });
+});
+document.getElementById('float-reserve').addEventListener('click', function() {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: 'floating_reserve_click', cta_location: 'floating_bar' });
+  if (typeof fbq === 'function') fbq('track', 'Lead');
+  if (typeof gtag === 'function') gtag('event', 'booking_click', { event_category: 'CTA', event_label: 'floating_bar' });
+});
+</script>
 
 </body>
 </html>
