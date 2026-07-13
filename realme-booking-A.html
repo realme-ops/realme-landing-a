@@ -689,14 +689,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 const PAYAPP_LINK = 'https://www.payapp.kr/L/z4gyb4';
 
 // ── UTM 파라미터 → inflow_channel ──────────────────────────
+// utm이 없을 때(대부분의 경우: utm은 예약페이지까지 전달되지 않음) 리퍼러로 추정:
+// 메인 랜딩 경유 = sns(광고가 주 유입원), 리퍼러 없는 직행 = direct, 그 외 외부 = referral
 function getInflowChannel() {
   const utm = new URLSearchParams(window.location.search).get('utm_source') || '';
   const map = {
     instagram: 'sns', youtube: 'sns', facebook: 'sns',
     blog: 'blog', naver: 'blog', naver_blog: 'blog',
     referral: 'referral', homepage: 'homepage',
+    kakao: 'kakao',
   };
-  return map[utm.toLowerCase()] || 'sns';
+  if (utm) return map[utm.toLowerCase()] || utm.toLowerCase();
+  const ref = document.referrer || '';
+  if (!ref) return 'direct';
+  try {
+    const rh = new URL(ref).hostname;
+    if (rh === window.location.hostname) return 'sns';
+    if (rh.indexOf('kakao') !== -1) return 'kakao';
+    return 'referral';
+  } catch (e) { return 'direct'; }
 }
 
 // ── 연락처 자동 하이픈 ──────────────────────────────────────
