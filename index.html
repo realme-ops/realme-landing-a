@@ -1593,7 +1593,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div style="text-align:center; margin-top:28px;">
     <a href="https://m.place.naver.com/place/2038540718/review/visitor" target="_blank" rel="noopener" id="naver-review-link"
        style="display:inline-flex; align-items:center; gap:8px; background:#03C75A; color:#fff; font-weight:800; font-size:15px; text-decoration:none; padding:15px 28px; border-radius:10px; box-shadow:0 4px 14px rgba(3,199,90,0.25);"
-       onclick="window.dataLayer=window.dataLayer||[]; window.dataLayer.push({event:'naver_review_click', cta_location:'reviews_section'}); if(typeof fbq==='function') fbq('track','ViewContent',{content_name:'naver_reviews'});">
+       onclick="window.dataLayer=window.dataLayer||[]; window.dataLayer.push({event:'naver_review_click', cta_location:'reviews_section'}); if(typeof gtag==='function') gtag('event','naver_place_click',{event_category:'outbound', event_label:'reviews_section'}); if(typeof fbq==='function') fbq('track','ViewContent',{content_name:'naver_reviews'});">
       <span style="background:#fff; color:#03C75A; font-weight:900; border-radius:5px; padding:1px 7px; font-size:14px;">N</span>
       네이버 실사진 후기 80개+ 직접 보기 →
     </a>
@@ -1700,6 +1700,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 document.getElementById('float-review').addEventListener('click', function() {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ event: 'floating_review_click', cta_location: 'floating_bar' });
+  if (typeof gtag === 'function') gtag('event', 'naver_place_click', { event_category: 'outbound', event_label: 'floating_bar' });
   if (typeof fbq === 'function') fbq('track', 'ViewContent', { content_name: 'naver_reviews' });
 });
 document.getElementById('float-reserve').addEventListener('click', function() {
