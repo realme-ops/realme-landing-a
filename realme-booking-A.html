@@ -709,7 +709,8 @@ const CREATE_PAYMENT_URL = 'https://npjudvehidwjofnmsdos.supabase.co/functions/v
 function getInflowChannel() {
   const utm = new URLSearchParams(window.location.search).get('utm_source') || '';
   const map = {
-    instagram: 'sns', youtube: 'sns', facebook: 'sns',
+    threads: 'threads',
+    instagram: 'paid ads', youtube: 'paid ads', facebook: 'paid ads', fb: 'paid ads', ig: 'paid ads', meta: 'paid ads',
     blog: 'blog', naver: 'blog', naver_blog: 'blog',
     referral: 'referral', homepage: 'homepage',
     kakao: 'kakao',
@@ -719,7 +720,7 @@ function getInflowChannel() {
   if (!ref) return 'direct';
   try {
     const rh = new URL(ref).hostname;
-    if (rh === window.location.hostname) return 'sns';
+    if (rh === window.location.hostname) return 'paid ads';
     if (rh.indexOf('kakao') !== -1) return 'kakao';
     return 'referral';
   } catch (e) { return 'direct'; }
