@@ -555,7 +555,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- 상품 소개 -->
   <p class="plans-label">Service Plans</p>
 
-  <div class="plan-view">
+  <div data-sec="booking_s01_plans" class="plan-view">
     <div class="plan-head">
       <div class="plan-head-left">
         <span class="plan-name">파인딩(Finding) 플랜</span>
@@ -593,7 +593,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 
-  <div class="plan-view">
+  <div data-sec="booking_s02_plans_end" class="plan-view">
     <div class="plan-head">
       <div class="plan-head-left">
         <span class="plan-name">멤버십(Membership)</span>
@@ -619,7 +619,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <hr class="divider">
 
   <!-- 예약 폼 -->
-  <p class="form-section-label" id="booking-form">예약자 정보 입력</p>
+  <p data-sec="booking_s03_form" class="form-section-label" id="booking-form">예약자 정보 입력</p>
 
   <div class="form-row">
     <div class="form-group">
@@ -664,7 +664,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p class="btn-sub-note">결제 후 카카오톡으로 사전질의서 링크가 발송됩니다</p>
 
   <!-- 예약금 안내 (CTA 아래) -->
-  <div class="deposit-banner">
+  <div data-sec="booking_s04_deposit" class="deposit-banner">
     <div class="deposit-label">Reservation Deposit</div>
     <div class="deposit-amount">20,000원</div>
     <div class="deposit-desc">
@@ -864,5 +864,24 @@ document.getElementById('float-reserve').addEventListener('click', function() {
 });
 </script>
 
+<script>
+/* 섹션 도달 트래킹 (2026-08-07): data-sec 지점이 화면 하단 35% 위로 들어오면 GA4 이벤트 1회.
+   booking_s01_plans ~ s04_deposit. landing 파라미터 = 스토리/일반 퍼널 구분(utm_source=story). */
+(function () {
+  var secs = document.querySelectorAll("[data-sec]");
+  if (!secs.length || !("IntersectionObserver" in window)) return;
+  var landing = "landing_a";
+  try { if (new URLSearchParams(location.search).get("utm_source") === "story") landing = "story"; } catch (e) {}
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      var name = en.target.getAttribute("data-sec");
+      io.unobserve(en.target);
+      try { if (typeof window.gtag === "function") window.gtag("event", name, { landing: landing }); } catch (e) {}
+    });
+  }, { threshold: 0, rootMargin: "0px 0px -35% 0px" });
+  secs.forEach(function (el) { io.observe(el); });
+})();
+</script>
 </body>
 </html>
