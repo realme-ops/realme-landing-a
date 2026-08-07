@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>리얼미 · 남성 이미지 컨설팅 — 옷·헤어·피부·체형까지</title>
+<meta name="description" content="직장·소개팅·모임, 상황마다 막막하다면 — 옷·헤어·피부·체형까지 상황에 맞게 깔끔한 인상을 1:1 프라이빗으로 잡아드리는 남성 이미지 컨설팅." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="얼굴은 그대로인데, 애프터가 쏟아지기 시작한 남자들" />
+<meta property="og:description" content="대체 뭘 바꿨을까요? 대화도, 성형도 아니에요 — 스스로 유지하는 모습을 만듭니다. 남성 이미지 컨설팅 리얼미." />
+<meta property="og:url" content="https://find-me.real-me.co.kr/story/" />
+<meta property="og:image" content="https://find-me.real-me.co.kr/story/images/ba-after-1.jpg" />
+<meta name="theme-color" content="#f7f8fa" />
+<link rel="icon" type="image/png" href="images/logo-white.png" />
+
+<!-- ============================================================
+     🧪 랜딩 테스트: "STORY" (2026-08-04 · 블로그형 스토리 — 디렉터 화자 서사)
+     · 빅 아이디어: 스타일 = 꾸밈이 아니라 '당신이 놓친 마지막 자기관리'
+     · 4장벽 해체 서사: ④정보부재 → ③정답있음 → ①스타일PT(외주수치) → ②전략(허영)
+     · style-ink.css / main.js / images 를 그대로 재사용 (같은 폴더에 둘 것)
+     · 색은 아래 <style id="더상세-blue"> 에서 오버라이드 (원본 CSS는 안 건드림)
+     ============================================================ -->
+
+<!-- 트래킹 ID (상세형과 동일) -->
+<script>
+  window.REALME_CONFIG = { GA4_ID: "G-TYWS49LKCM", META_PIXEL_ID: "468864818533646" };
+</script>
+<script>
+(function(){var id=window.REALME_CONFIG.GA4_ID;if(!id||id.indexOf('X')>-1)return;
+var s=document.createElement('script');s.async=true;
+s.src='https://www.googletagmanager.com/gtag/js?id='+id;document.head.appendChild(s);
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+window.gtag=gtag;gtag('js',new Date());gtag('config',id);gtag('event','landing_view',{landing:'story'});})();
+</script>
+<script>
+(function(){var id=window.REALME_CONFIG.META_PIXEL_ID;if(!id||id.indexOf('0000000000000000')===0)return;
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');fbq('init',id);fbq('track','PageView');})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:wght@500;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style-ink.css?v=20260724blue" />
+
+<!-- ① 쨍한 블루 오버라이드 (원본 soft blue #4a74ad → 진한 로열블루) -->
+<style id="더상세-blue">
+:root{
+  --lime:#2563eb; --lime-soft:#B5BFCC;
+  --red:#2563eb; --red-deep:#1d4ed8;
+  --terra-soft:rgba(37,99,235,.09);
+  --terra-line:rgba(37,99,235,.28);
+  --terra-bright:#2563eb;
+  --navy:#F7F8FA;
+  --navy-deep:#EEF1F4;
+}
+/* CTA 조금 더 쨍하게 + 대비 */
+.offer-cta,.apply-cta,.sticky-cta__btn{background:#2563eb !important;box-shadow:0 8px 24px rgba(29,78,216,.22) !important;}
+.offer-cta:hover,.apply-cta:hover,.sticky-cta__btn:hover{background:#1d4ed8 !important;}
+.hero-offer-pill{border-color:rgba(37,99,235,.32);}
+</style>
+
+<!-- 인라인 보정(상세형과 동일) + '더상세' 신규 섹션 스타일 -->
+<style>
+.svc-head{text-align:center;} .svc-head .svc-step{margin-bottom:6px;}
+.svc-head .svc-title{font-size:26px;margin-bottom:0;} .svc-head .svc-room{font-size:13.5px;font-weight:600;color:var(--muted);margin-top:7px;}
+.svc-media{max-width:440px;margin:0 auto;} .svc-body{width:100%;max-width:520px;margin:0 auto;}
+.stats-strip{display:flex;justify-content:center;gap:38px;margin:26px auto 2px;text-align:center;}
+.stats-strip .stat b{display:block;font-family:'Libre Bodoni',serif;font-size:30px;font-weight:700;color:var(--lime);line-height:1.25;}
+.stats-strip .stat span{font-size:12.5px;color:var(--muted);}
+/* 신청 전 마지막 질문 (반대심리 저격 — 상담 실발언 톤, 2026-08-03) */
+.lq-item{max-width:560px;margin:22px auto 0;background:var(--navy-card);border:1px solid var(--line);border-radius:16px;padding:24px 26px;box-shadow:0 1px 3px var(--shadow);}
+.lq-q{font-size:17px;font-weight:800;color:var(--white);word-break:keep-all;line-height:1.5;}
+.lq-q::before{content:'💬 ';}
+.lq-steps{margin:14px 0 0;padding-left:0;list-style:none;counter-reset:lq;}
+.lq-steps li{counter-increment:lq;font-size:14.5px;color:var(--ink-mid);line-height:1.6;padding:7px 0 7px 34px;position:relative;word-break:keep-all;}
+.lq-steps li::before{content:counter(lq);position:absolute;left:0;top:6px;width:24px;height:24px;border-radius:50%;background:var(--terra-soft);border:1px solid var(--terra-line);color:var(--terra-bright);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+.lq-note{margin-top:14px;font-size:14px;font-weight:700;color:var(--white);line-height:1.65;word-break:keep-all;border-top:1px solid var(--line);padding-top:14px;}
+.shroom-img{flex:0 0 440px;}
+@media (max-width:600px){ .shroom-img{flex:0 0 320px;} }
+@media (max-width:520px){ .svc-head .svc-title{font-size:22px;} .svc-media{max-width:330px;} .stats-strip{gap:22px;} .stats-strip .stat b{font-size:23px;} }
+
+/* ── 더상세 신규 섹션 공용 ── */
+.cost-quote{max-width:560px;margin:22px auto 0;padding:20px 22px;background:var(--terra-soft);border-left:4px solid var(--lime);border-radius:0 12px 12px 0;text-align:left;font-size:16px;line-height:1.7;color:var(--white);}
+.cost-quote b{color:var(--terra-bright);}
+/* 비교표 — min-width 제거로 모바일 한 화면에 수납, 항목열 폭 고정으로 유튜브열과의 간격 축소 (2026-08-04) */
+.cmp-wrap{max-width:600px;margin:26px auto 0;overflow-x:auto;}
+.cmp{width:100%;border-collapse:separate;border-spacing:0;font-size:13.5px;}
+.cmp th,.cmp td{padding:12px 6px;text-align:center;border-bottom:1px solid var(--line);}
+.cmp td.rowh{width:34%;padding-left:0;word-break:keep-all;}
+.cmp thead th{font-weight:800;color:var(--muted);font-size:12.5px;}
+.cmp thead th.us{color:#fff;background:var(--lime);border-radius:10px 10px 0 0;}
+.cmp td.us{background:var(--terra-soft);font-weight:700;color:var(--terra-bright);}
+.cmp td.rowh{text-align:left;font-weight:700;color:var(--white);}
+.cmp .o{color:var(--lime);font-weight:800;} .cmp .x{color:#b9c0c9;}
+@media (max-width:520px){.cmp{font-size:12px;}.cmp thead th{font-size:11px;}.cmp td.rowh{font-size:12px;}.cmp th,.cmp td{padding:11px 4px;}}
+/* 걱정 해소 Q&A */
+.worry-list{max-width:560px;margin:24px auto 0;display:flex;flex-direction:column;gap:14px;}
+.worry-card{background:var(--navy-card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;text-align:left;box-shadow:0 4px 14px var(--shadow);}
+.worry-q{font-size:15px;font-weight:800;color:var(--white);margin:0 0 8px;}
+.worry-q .qmark{color:var(--terra-bright);margin-right:6px;}
+.worry-a{font-size:14px;line-height:1.65;color:var(--ink-mid);margin:0;}
+.worry-a b{color:var(--terra-bright);}
+/* 본문 정적 비포/애프터 (2026-08-04 — 슬라이더는 기억에 안 남아 본문 맥락 배치) */
+.ba-static{display:flex;gap:10px;max-width:520px;margin:0 auto;justify-content:center;}
+.ba-static .ba-card{flex:1;min-width:0;}
+.ba-caption{text-align:center;font-size:12.5px;color:var(--muted);margin:12px auto 0;word-break:keep-all;}
+/* 인생샷 조합 콜아웃 — 밝은 블루 배경 + 진한 글자(가독성 우선) */
+.combo{max-width:560px;margin:24px auto 0;padding:26px 24px;background:#F1F3F6;border:1px solid rgba(37,99,235,.20);border-radius:18px;text-align:center;color:#24344d;}
+.combo .cb-eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--lime);}
+.combo h3{font-size:22px;font-weight:900;margin:10px 0 8px;line-height:1.4;color:#1d5fd0;}
+.combo p{font-size:14.5px;line-height:1.7;color:#3f4d6b;margin:0;}
+.combo p b{color:var(--lime);}
+.combo .cb-num{font-family:'Libre Bodoni',serif;font-size:15px;font-weight:700;color:var(--lime);}
+/* 이런 분께 추천 체크 */
+.forwho{max-width:520px;margin:22px auto 0;display:flex;flex-direction:column;gap:10px;text-align:left;}
+.forwho-item{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.55;color:var(--white);}
+.forwho-item .ck{flex:none;width:22px;height:22px;border-radius:50%;background:var(--lime);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:900;margin-top:1px;}
+.skip-link{position:fixed;left:16px;top:-60px;z-index:100;background:#1d5fd0;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:800;}
+.skip-link:focus{top:16px;}
+.hero .brand-logo{filter:brightness(0) saturate(100%) invert(18%) sepia(15%) saturate(955%) hue-rotate(182deg) brightness(89%);}
+.hero-proof{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;max-width:560px;margin:22px auto 0;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:var(--line);}
+.hero-proof div{background:#fff;padding:14px 8px;}
+.hero-proof b{display:block;color:#1d5fd0;font-size:17px;font-weight:900;font-variant-numeric:tabular-nums;}
+.hero-proof span{display:block;margin-top:3px;color:var(--muted);font-size:11.5px;}
+.hero-cta-primary{display:inline-flex;align-items:center;justify-content:center;margin:20px auto 4px;padding:15px 28px;border-radius:12px;background:#2563eb;color:#fff;text-decoration:none;font-size:16px;font-weight:900;box-shadow:0 8px 24px rgba(29,78,216,.20);transition:transform .2s,background .2s;}
+.hero-cta-primary:hover{background:#1d4ed8;transform:translateY(-2px);}
+.hero-cta-primary:active{transform:translateY(0) scale(.98);}
+.hero-cta-primary:focus-visible,.offer-cta:focus-visible,.apply-cta:focus-visible,.sticky-cta__btn:focus-visible{outline:3px solid rgba(37,99,235,.32);outline-offset:3px;}
+.hero-cta-note{font-size:12.5px;color:var(--muted);margin-top:8px;}
+.hero-risk{max-width:560px;margin:14px auto 0;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#fff;text-align:left;box-shadow:0 8px 24px rgba(27,42,59,.06);}
+.hero-risk strong{display:block;color:var(--ink);font-size:15px;font-weight:900;margin-bottom:7px;}
+.hero-risk p{margin:0;color:#46515f;font-size:13px;line-height:1.65;}
+.hero-risk-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;}
+.hero-risk-meta span{padding:6px 9px;border-radius:999px;background:#F1F3F6;color:#1d4ed8;font-size:11.5px;font-weight:800;}
+.offer-availability{margin:16px 0 4px;padding:12px 14px;border-radius:10px;background:#F1F3F6;color:#1d4ed8;font-size:13px;font-weight:700;text-align:center;}
+.situation-panel{max-width:900px;margin:34px auto 0;padding:30px 26px;border-radius:20px;background:#F1F3F6;border:1px solid rgba(37,99,235,.18);text-align:center;}
+.situation-panel h3{margin:0;color:var(--ink);font-size:clamp(22px,4vw,32px);line-height:1.35;letter-spacing:-.04em;}
+.situation-panel>p{margin:10px 0 0;color:var(--muted);font-size:14px;line-height:1.65;}
+.situation-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px;}
+.situation-item{padding:20px 14px;border-radius:14px;background:#fff;border:1px solid var(--line);}
+.situation-item span{display:block;margin-bottom:8px;color:#2563eb;font-size:12px;font-weight:900;letter-spacing:.08em;}
+.situation-item b{display:block;color:var(--ink);font-size:16px;line-height:1.55;word-break:keep-all;}
+/* 자기관리 3카드 — STYLE 칸만 강조(비어있음 시각화) */
+.care-grid .situation-item.blank{border:1.5px dashed var(--terra-line);background:var(--terra-soft);}
+.care-grid .situation-item .care-state{display:block;margin-top:10px;font-size:12.5px;font-weight:800;}
+.care-grid .situation-item .yes{color:#2563eb;} .care-grid .situation-item .no{color:#9aa4b0;}
+.site-footer{padding:30px 20px 130px;text-align:center;color:var(--muted);font-size:12px;line-height:1.8;border-top:1px solid var(--line);}
+.site-footer a{color:inherit;text-underline-offset:3px;}
+@media (max-width:520px){.hero-proof b{font-size:15px;}.hero-proof span{font-size:10.5px;}.hero-cta-primary{width:100%;}.situation-panel{padding:24px 16px;}.situation-grid{grid-template-columns:1fr;}.situation-item{padding:16px 12px;}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">본문 바로가기</a>
+<!-- ============================================================
+     ✏️ 텍스트 수정 가이드: > 와 < 사이 한글만 고치세요. 태그·class·href는 건드리지 마세요.
+     섹션: 1히어로 2자기관리선언 3문제 4왜실패(정답) 5비교표 6쇼룸 7스타일PT
+           8서비스 9카톡후기 10실제후기 11걱정해소 12플랜 13FAQ 14마지막질문 15최종CTA
+     ============================================================ -->
+<main class="landing" id="main-content">
+
+  <!-- ===== 1. 히어로 ===== -->
+  <section class="hero">
+    <div class="nav-row">STYLING<img class="brand-logo" src="images/logo-white.png" alt="REAL ME">PERSONAL</div>
+    <div class="hero-eyebrow">남성 이미지 컨설팅 · REAL ME</div>
+    <h1 class="hero-title">얼굴은 그대로인데<br><em>애프터가 쏟아지기 시작한 남자들</em><br>대체 뭘 바꿨을까요?</h1>
+    <p class="hero-sub"><span style="display:block;font-size:15px;line-height:1.35;margin-bottom:14px;">대화도, 성형도 아니에요.</span>리얼미는 한 번의 사진, 변신이 아니라<br><b>스스로 유지하는 모습</b>을 만듭니다.</p>
+    <a href="https://find-me.real-me.co.kr/realme-booking-A.html?utm_source=story" class="hero-cta-primary js-booking" data-cta="hero">내 스타일 상담 신청하기</a>
+    <p class="hero-cta-note">예약 페이지에서 원하는 플랜을 고르고 바로 일정을 잡을 수 있습니다.</p>
+    <div class="hero-proof" aria-label="리얼미 주요 정보"><div><b>2,000명+</b><span>누적 디렉팅</span></div><div><b>1:1</b><span>프라이빗 진행</span></div><div><b>잠실</b><span>예약제 쇼룸</span></div></div>
+    <div class="hero-hint" aria-hidden="true">↓ 어떻게 바뀌는지 직접 보세요</div>
+    <div class="slider">
+      <div class="slider-view">
+        <div class="slider-track" id="baTrack">
+          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-1.jpg"><img src="images/ba-before-1.jpg" alt="비포 1" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-1.jpg"><img src="images/ba-after-1.jpg" alt="애프터 1" onerror="this.style.display='none'"></div></div></div>
+          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-2.jpg"><img src="images/ba-before-2.jpg" alt="비포 2" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-2.jpg"><img src="images/ba-after-2.jpg" alt="애프터 2" onerror="this.style.display='none'"></div></div></div>
+          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-3.jpg"><img src="images/ba-before-3.jpg" alt="비포 3" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-3.jpg"><img src="images/ba-after-3.jpg" alt="애프터 3" onerror="this.style.display='none'"></div></div></div>
+          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-4.jpg"><img src="images/ba-before-4.jpg" alt="비포 4" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-4.jpg"><img src="images/ba-after-4.jpg" alt="애프터 4" onerror="this.style.display='none'"></div></div></div>
+          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-5.jpg"><img src="images/ba-before-5.jpg" alt="비포 5" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-5.jpg"><img src="images/ba-after-5.jpg" alt="애프터 5" onerror="this.style.display='none'"></div></div></div>
+        </div>
+      </div>
+      <button class="slider-btn prev" id="baPrev" aria-label="이전">‹</button>
+      <button class="slider-btn next" id="baNext" aria-label="다음">›</button>
+      <div class="slider-dots" id="baDots"></div>
+    </div>
+    <p class="slider-caption">* 리얼미를 직접 경험한 실제 고객 비포/애프터 사례입니다.</p>
+    <a href="#plans" class="hero-offer-pill">🔥 첫 방문 100명 한정 · <b>50%</b> 할인 <span class="hop-go">가격 보기 ↓</span></a>
+  </section>
+
+  <!-- ===== 3. 문제 몰아치기 (VoC) ===== -->
+  <section class="pain" data-reveal>
+    <div class="eyebrow">FROM THE CONSULTING ROOM</div>
+    <h2 class="sec-title">상담실에서 제일 많이<br><em>듣는 말들이에요</em></h2>
+    <div class="pain-list">
+      <div class="pain-card"><span class="pain-no">01</span><p>평소엔 츄리닝, 신경 쓰는 날엔 셔츠에 슬랙스 한 벌만 입어요.</p></div>
+      <div class="pain-card"><span class="pain-no">02</span><p>무*사 랭킹이나 마네킹을 보고 샀는데, 제가 입으면 어울리지 않았어요.</p></div>
+      <div class="pain-card"><span class="pain-no">03</span><p>살을 빼거나 찌고 나니 예전에 입던 옷을 어떻게 바꿔야 할지 모르겠어요.</p></div>
+      <div class="pain-card"><span class="pain-no">04</span><p>배, 어깨, 가슴살 때문에 핏이 애매해서 옷에 더 관심이 없어졌어요.</p></div>
+      <div class="pain-card"><span class="pain-no">05</span><p>옷에는 관심이 있는데, 저한테 어떤 스타일과 색이 맞는지는 모르겠어요.</p></div>
+      <div class="pain-card"><span class="pain-no">06</span><p>깔끔하고 무난하게만 입었는데, 이제는 센스 있게 입는 법을 배우고 싶어요.</p></div>
+    </div>
+    <p class="pain-close">당신이 센스가 없어서가 아니에요.<br><em>옷 고르는 '기준'을 배운 적이 없을 뿐.</em></p>
+  </section>
+
+  <!-- ===== 4. 왜 실패했나 (정답이 있다) ===== -->
+  <section class="whyus" data-reveal style="padding-top:0;">
+    <div class="eyebrow">THERE'S AN ANSWER</div>
+    <h2 class="sec-title">무*사 따라 사도<br><em>안 되던 이유</em></h2>
+    <div class="cost-quote">
+      마네킹에 걸린 옷이 멋져 보이는 건, 마네킹이 <b>표준 체형</b>이라서예요.<br>
+      배가 나오고, 어깨가 좁고, 키가 다른 당신에겐 <b>당신 체형의 정답이 따로</b> 있습니다.<br>
+      스타일은 취향의 문제가 아니라, <b>내 몸에 맞는 공식</b>이에요.
+    </div>
+    <p class="sec-sub" style="margin-top:16px;">그 공식을, 리얼미가 <b>고객님의 몸을 기준으로</b> 찾아드립니다.</p>
+  </section>
+
+  <!-- ===== 2. 이런 거 해보신 적 있나요? (문제 인식→미니 교육, 2026-08-03) ===== -->
+  <section class="whyus" data-reveal>
+    <div class="eyebrow">FOUR QUESTIONS</div>
+    <h2 class="sec-title">첫 상담에서 꼭 묻는<br><em>네 가지가 있어요</em></h2>
+    <div class="worry-list">
+      <div class="worry-card">
+        <p class="worry-q">☐ 스킨케어, '제대로' 해본 적 있나요?</p>
+        <p class="worry-a">리얼미에 오시는 남성분 대부분이 토너 하나만 바르고 끝내요. 그러면 피부가 마르면서 결이 거칠어지고, 그 상태가 몇 년 쌓이면 주름이 돼요. <b>토너패드로 결을 정리하고 수분을 잡아주는 것</b>만으로 인상이 달라지는데 — 내 피부에 뭘 써야 하는지는, 피부를 봐야 알아요.</p>
+      </div>
+      <div class="worry-card">
+        <p class="worry-q">☐ 내 체형에 맞는 핏과 소재, 골라본 적 있나요?</p>
+        <p class="worry-a">가슴·배가 고민이면 다들 큰 옷으로 가리는데, 답은 반대예요 — <b>탄탄한 니트가 오히려 잡아주면서 가려줘요.</b> 어깨가 좁은 게 고민이라면? <b>넓어 보이게 핏을 잡는 법이 따로 있어요.</b> 린넨이 어울리는 사람, 실크가 어울리는 사람도 따로 있고요. 리얼미 디렉터들은 옷 핏 잡는 노하우로 <b>어깨·골반·팔 라인</b>을 만들어 드려요.</p>
+      </div>
+      <div class="worry-card">
+        <p class="worry-q">☐ 내 피부톤에 맞는 색, 진단받아 본 적 있나요?</p>
+        <p class="worry-a">옷장을 열면 검정·네이비·흰색뿐인 분들이 많아요. 안전해 보이지만, 같은 네이비도 <b>웜톤이 입으면 칙칙해지고, 쿨톤이 입으면 살아나요.</b> 색 하나 바꿨을 뿐인데 "안색 좋아졌다" 소리를 듣는 이유가 이거예요. 내가 웜인지 쿨인지는, 얼굴에 색을 대보기 전엔 몰라요.</p>
+      </div>
+      <div class="worry-card">
+        <p class="worry-q">☐ 내 얼굴형에 맞는 헤어, 설계해본 적 있나요?</p>
+        <p class="worry-a">미용실에서 "알아서 해주세요" 하는 순간, 유행 컷의 평균으로 수렴해요. 같은 컷도 <b>이마 라인과 광대 위치</b>에 따라 어울림이 갈리고, 다운펌 하나로 인상이 바뀌는 경우도 많아요. 어떤 라인을 살릴지는, 얼굴형을 보고 정하는 거예요.</p>
+      </div>
+    </div>
+    <p class="pain-close">하나도 없어도 정상이에요. <em>배운 적이 없으니까.</em><br>학교도, 회사도, 친구도 이건 안 가르쳐줍니다.</p>
+    <p class="sec-sub" style="margin-top:14px;">리얼미 90분은 이 네 가지를 <b>내 얼굴·내 체형 기준으로</b> 한 번에 잡는 시간이에요.</p>
+    <div class="situation-panel">
+      <div class="situation-grid" style="grid-template-columns:repeat(2,1fr);">
+        <div class="situation-item"><span>HAIR</span><b>헤어<br>얼굴형·모질에 맞는 스타일</b></div>
+        <div class="situation-item"><span>SKIN</span><b>피부·피부화장<br>칙칙함·잡티 정돈</b></div>
+        <div class="situation-item"><span>BODY</span><b>체형 보완<br>가슴·배·허벅지 살리는 핏</b></div>
+        <div class="situation-item"><span>REAL TALK</span><b>남자 고민은 남자가 더 잘 알지!</b><small style="display:block;margin-top:5px;font-size:11.5px;font-weight:600;color:var(--muted);">남성 디렉터 디렉팅 가능</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 본문 정적 비포/애프터 2 -->
+  <section class="whyus" data-reveal style="padding-top:0;">
+    <div class="ba-static">
+      <div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-2.jpg"><img src="images/ba-before-2.jpg" alt="비포 2" onerror="this.style.display='none'"></div></div>
+      <div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-2.jpg"><img src="images/ba-after-2.jpg" alt="애프터 2" onerror="this.style.display='none'"></div></div>
+    </div>
+    <p class="ba-caption">핏과 색만 바로잡았을 때의 실제 변화예요.</p>
+  </section>
+
+  <!-- ===== 4.5 왜 시도 못 했나 (실패의 관객 · 판정 기준 부재, 2026-08-03) ===== -->
+  <section class="whyus" data-reveal>
+    <div class="eyebrow">WHY YOU NEVER TRIED</div>
+    <h2 class="sec-title">여태 시도 못 한 건,<br><em>게을러서가 아니에요</em></h2>
+    <div class="worry-list">
+      <div class="worry-card">
+        <p class="worry-q">"갑자기 꾸미면 무슨 소리 들을지 뻔한데."</p>
+        <p class="worry-a">맞아요. 남자들 사이에서 확 꾸미고 나타나면 "뭐야, 소개팅 있냐?"부터 나오죠. 근데 그 놀림은 <b>'꾸민 티'</b>에 붙는 거예요. 리얼미가 잡는 지점은 반대예요 — <b>뭐가 바뀐진 모르겠는데, 좋아 보이는 상태.</b> 핏과 색만 바로잡아도 "너 뭐 했냐?"가 아니라 <b>"오늘 옷 잘 어울린다"</b>가 나와요.</p>
+      </div>
+      <div class="worry-card">
+        <p class="worry-q">"해봤자, 잘 된 건지 어떻게 알아?"</p>
+        <p class="worry-a">운동엔 인바디라는 숫자가 있는데, 스타일엔 지표가 없었죠. 그래서 리얼미는 <b>진단 결과표(PDF)</b>를 드려요. 내 얼굴형·피부톤·체형에 뭐가 맞고 뭐가 안 맞는지 문서로 남아요. 이제 감이 아니라 <b>기준으로</b> 판단하게 됩니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 6. 쇼룸 갤러리 ===== -->
+  <section class="showroom" data-reveal>
+    <div class="eyebrow">OUR SHOWROOM</div>
+    <h2 class="sec-title">그래서 저희는<br><em>쇼룸을 만들었어요</em></h2>
+    <p class="sec-sub">2022년 구로에서 시작해 지금의 잠실까지, <b>2,000명 넘게</b> 디렉팅했어요.<br>연예인같이 완성된 몸이 아니라, <b>가슴·배·어깨·키가 고민인 분들</b>을 바꿔온 시간이에요.</p>
+    <div class="shroom-marquee">
+      <div class="shroom-track" id="shroomTrack">
+        <div class="imgslot r43 shroom-img" data-label="showroom-1.jpg"><img src="images/showroom-1.jpg" alt="리얼미 쇼룸 1" onerror="this.style.display='none'"></div>
+        <div class="imgslot r43 shroom-img" data-label="showroom-2.jpg"><img src="images/showroom-2.jpg" alt="리얼미 쇼룸 2" onerror="this.style.display='none'"></div>
+        <div class="imgslot r43 shroom-img" data-label="showroom-3.jpg"><img src="images/showroom-3.jpg" alt="리얼미 쇼룸 3" onerror="this.style.display='none'"></div>
+        <div class="imgslot r43 shroom-img" data-label="showroom-4.jpg"><img src="images/showroom-4.jpg" alt="리얼미 쇼룸 4" onerror="this.style.display='none'"></div>
+        <div class="imgslot r43 shroom-img" data-label="showroom-5.jpg"><img src="images/showroom-5.jpg" alt="리얼미 쇼룸 5" onerror="this.style.display='none'"></div>
+        <div class="imgslot r43 shroom-img" data-label="showroom-6.jpg"><img src="images/showroom-6.jpg" alt="리얼미 쇼룸 6" onerror="this.style.display='none'"></div>
+        <div class="imgslot r43 shroom-img" data-label="showroom-7.jpg"><img src="images/showroom-7.jpg" alt="리얼미 쇼룸 7" onerror="this.style.display='none'"></div>
+        <div class="imgslot r43 shroom-img" data-label="showroom-8.jpg"><img src="images/showroom-8.jpg" alt="리얼미 쇼룸 8" onerror="this.style.display='none'"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 8. 서비스 상세 ===== -->
+  <section class="service" data-reveal>
+    <div class="eyebrow">HOW IT WORKS</div>
+    <h2 class="sec-title">과정은 <em>두 가지예요</em></h2>
+    <p class="sec-sub">어디까지 관리할지에 따라 고르시면 됩니다.</p>
+    <div class="svc-block">
+      <div class="svc-head"><span class="svc-step">진단·평가 · 파인딩 플랜</span><h3 class="svc-title">나는 남에게 어떻게 보일까?</h3><p class="svc-room">프라이빗 룸에서 1:1 인상 평가 (30분)</p></div>
+      <div class="svc-media"><div class="svc-carousel"><div class="svc-ctrack">
+        <div class="svc-slide imgslot r43" data-label="service-1-1.jpg"><img src="images/service-1-1.jpg" alt="파인딩 진단 1" onerror="this.style.display='none'"></div>
+        <div class="svc-slide imgslot r43" data-label="service-1-2.jpg"><img src="images/service-1-2.jpg" alt="파인딩 진단 2" onerror="this.style.display='none'"></div>
+        <div class="svc-slide imgslot r43" data-label="service-1-3.jpg"><img src="images/service-1-3.jpg" alt="파인딩 진단 3" onerror="this.style.display='none'"></div>
+      </div><button class="svc-nav prev" aria-label="이전">‹</button><button class="svc-nav next" aria-label="다음">›</button><div class="svc-dots"></div></div></div>
+      <div class="svc-body"><ul class="svc-list"><li>처음 봤을 때 느껴지는 인상 평가</li><li>얼굴·체형·분위기가 남에게 어떻게 보이는지 진단</li><li>현재 이미지의 객관적인 진단 결과표 제공 (PDF)</li></ul></div>
+    </div>
+    <div class="svc-block reverse">
+      <div class="svc-head"><span class="svc-step">진단+해결 · 원데이 플랜</span><h3 class="svc-title">그래서 무엇을 바꿔야 할까?</h3><p class="svc-room">프라이빗 룸에서 1:1 이미지 디렉팅 (90분)</p></div>
+      <div class="svc-media"><div class="svc-carousel"><div class="svc-ctrack">
+        <div class="svc-slide imgslot r43" data-label="service-2-1.jpg"><img src="images/service-2-1.jpg" alt="원데이 디렉팅 1" onerror="this.style.display='none'"></div>
+        <div class="svc-slide imgslot r43" data-label="service-2-2.jpg"><img src="images/service-2-2.jpg" alt="원데이 디렉팅 2" onerror="this.style.display='none'"></div>
+        <div class="svc-slide imgslot r43" data-label="service-2-3.jpg"><img src="images/service-2-3.jpg" alt="원데이 디렉팅 3" onerror="this.style.display='none'"></div>
+      </div><button class="svc-nav prev" aria-label="이전">‹</button><button class="svc-nav next" aria-label="다음">›</button><div class="svc-dots"></div></div></div>
+      <div class="svc-body"><ul class="svc-list"><li>얼굴·체형·분위기의 장점과 보완점 설명</li><li>어깨·허리·다리 비율에 맞는 체형 보완 방법</li><li>얼굴형·모질에 맞는 헤어 추천과 현장 스타일링</li><li>색·소재·핏을 비교하는 실제 의상 피팅</li><li>달라진 실제 모습으로 프로필 사진 촬영</li></ul></div>
+    </div>
+    <div class="svc-block">
+      <div class="svc-head"><span class="svc-step">유지·관리 · 멤버십</span><h3 class="svc-title">계절이 바뀌어도 유지되도록</h3></div>
+      <div class="svc-media"><div class="svc-carousel"><div class="svc-ctrack">
+        <div class="svc-slide imgslot r43" data-label="service-3-1.jpg"><img src="images/service-3-1.jpg" alt="멤버십 1" onerror="this.style.display='none'"></div>
+        <div class="svc-slide imgslot r43" data-label="service-3-2.jpg"><img src="images/service-3-2.jpg" alt="멤버십 2" onerror="this.style.display='none'"></div>
+        <div class="svc-slide imgslot r43" data-label="service-3-3.jpg"><img src="images/service-3-3.jpg" alt="멤버십 3" onerror="this.style.display='none'"></div>
+      </div><button class="svc-nav prev" aria-label="이전">‹</button><button class="svc-nav next" aria-label="다음">›</button><div class="svc-dots"></div></div></div>
+      <div class="svc-body"><ul class="svc-list"><li>3가지 멤버십 운영 (Essential · Signature · Iconic)</li><li>적립금을 충전해 방문할 때마다 차감하는 방식</li><li>원데이 플랜 무료 진행</li><li>리얼미 프리미엄 착장 구매 가능</li><li>시즌별 착장 추천 및 이미지 업데이트 관리</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 본문 정적 비포/애프터 3 -->
+  <section class="whyus" data-reveal style="padding-top:0;">
+    <div class="ba-static">
+      <div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-3.jpg"><img src="images/ba-before-3.jpg" alt="비포 3" onerror="this.style.display='none'"></div></div>
+      <div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-3.jpg"><img src="images/ba-after-3.jpg" alt="애프터 3" onerror="this.style.display='none'"></div></div>
+    </div>
+    <p class="ba-caption">잠실 쇼룸에서 90분 디렉팅을 받은 분들이에요.</p>
+  </section>
+
+  <!-- ===== 9. 카톡 후기 ===== -->
+  <section class="reviews-kakao" data-reveal>
+    <div class="eyebrow">REAL STORY</div>
+    <h2 class="sec-title">받기 전에는 걱정했지만<br><em>직접 입어보니 알겠더라고요</em></h2>
+    <div class="kakao-grid">
+      <div class="imgslot r-free" data-label="kakao-1.jpg"><img src="images/kakao-1.jpg" alt="카톡 후기 1" onerror="this.style.display='none'"></div>
+      <div class="imgslot r-free" data-label="kakao-2.jpg"><img src="images/kakao-2.jpg" alt="카톡 후기 2" onerror="this.style.display='none'"></div>
+      <div class="imgslot r-free" data-label="kakao-3.jpg"><img src="images/kakao-3.jpg" alt="카톡 후기 3" onerror="this.style.display='none'"></div>
+    </div>
+    <p class="kakao-more">* 디렉팅 후 실제로 받은 카톡 메시지들입니다.</p>
+  </section>
+
+  <!-- ===== 10. 실제 후기 (VoC 923건에서) ===== -->
+  <section class="reviews-text" data-reveal>
+    <div class="eyebrow">2,000+ REVIEWS</div>
+    <h2 class="sec-title"><em>“내가 이렇게 바뀔 수 있구나”</em></h2>
+    <p class="sec-sub">2,000명 이상이 직접 남긴 변화의 기록</p>
+    <div class="rv-list">
+      <div class="rv-item"><div class="imgslot r-sq" data-label="review-1.jpg"><img src="images/review-1.jpg" alt="후기 사진 1" onerror="this.style.display='none'"></div><div class="rv-text"><div class="rv-top"><b>연*혁</b><span class="stars">★★★★★</span></div><p>좀 낯설지 않을까 걱정했는데 옷태 나게 어깨 잡아주시고 허리 접는 법도 알려주셔서 좋았어요~ 디렉터님이 친절하고 자세하게 알려주셔서 좋았어요!</p></div></div>
+      <div class="rv-item"><div class="imgslot r-sq" data-label="review-2.jpg"><img src="images/review-2.jpg" alt="후기 사진 2" onerror="this.style.display='none'"></div><div class="rv-text"><div class="rv-top"><b>문*진</b><span class="stars">★★★★★</span></div><p>성의없이 시간때우기로 진행될 줄 알았는데, 남자들이 어려운 기초부터 체형·얼굴빛에 맞는 것까지 디테일하게 잡아주셔서 자신감이 붙었어요.</p></div></div>
+      <div class="rv-item"><div class="imgslot r-sq" data-label="review-3.jpg"><img src="images/review-3.jpg" alt="후기 사진 3" onerror="this.style.display='none'"></div><div class="rv-text"><div class="rv-top"><b>박*원</b><span class="stars">★★★★★</span></div><p>지금 내 모습으로 그냥 도전하면 솔직히 많이 실패하잖아요. 잘 모르겠으면 고민하지 말고 받아보세요. 빨리 다음 연애를 준비할 수 있어요.</p></div></div>
+    </div>
+  </section>
+
+  <!-- 본문 정적 비포/애프터 4 -->
+  <section class="whyus" data-reveal style="padding-top:0;">
+    <div class="ba-static">
+      <div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-4.jpg"><img src="images/ba-before-4.jpg" alt="비포 4" onerror="this.style.display='none'"></div></div>
+      <div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-4.jpg"><img src="images/ba-after-4.jpg" alt="애프터 4" onerror="this.style.display='none'"></div></div>
+    </div>
+    <p class="ba-caption">과한 보정 없이, 카메라 왜곡만 잡은 실제 사진이에요.</p>
+  </section>
+
+  <!-- ===== 5. 비교표 ===== -->
+  <section class="whyus" data-reveal style="padding-top:0;">
+    <div class="eyebrow">COMPARE</div>
+    <h2 class="sec-title">"다른 곳이랑 뭐가 다른가요?"<br><em>정말 많이 받는 질문이에요</em></h2>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th></th><th>유튜브<br>영상</th><th>1회성<br>사진촬영</th><th>스타일<br>교육</th><th class="us">리얼미</th></tr></thead>
+        <tbody>
+          <tr><td class="rowh">내 체형·얼굴에 맞춤</td><td class="x">✕</td><td class="x">△</td><td class="x">△</td><td class="us">✓</td></tr>
+          <tr><td class="rowh">이동 없이 쇼룸에서 바로 피팅</td><td class="x">✕</td><td class="x">✕</td><td class="x">✕</td><td class="us">✓</td></tr>
+          <tr><td class="rowh">사진 아닌 '실물'이 바뀜</td><td class="x">△</td><td class="x">사진만</td><td class="x">△</td><td class="us">✓</td></tr>
+          <tr><td class="rowh">혼자서도 유지할 기준</td><td class="x">✕</td><td class="x">✕</td><td class="x">△</td><td class="us">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="worry-list">
+      <div class="worry-card"><p class="worry-q">설명만 듣고 끝나는 게 아니에요</p><p class="worry-a">쇼룸에서 직접 입어보고, 거울로 확인하고, 결과지까지 받아요. 몇 개월짜리 강의가 아니라, '나'에게 맞는 것만 속성으로 배우는 <b>스타일링 과외</b>라고 생각하시면 돼요.</p></div>
+      <div class="worry-card"><p class="worry-q">멀리 나갈 것 없이, 쇼룸에서 90분</p><p class="worry-a">리얼미는 동행쇼핑은 하지 않아요. 입어본 옷이 마음에 들었다면 그 자리에서 구매가 가능해요. (선택사항)</p></div>
+      <div class="worry-card"><p class="worry-q">내추럴 SNS 사진</p><p class="worry-a">과도하게 보정된 사진은 찍지 않아요. 카메라의 왜곡만 잡아, 자연스러우면서도 멋있을 수 있도록 촬영해드려요.</p></div>
+      <div class="worry-card"><p class="worry-q">남성 이미지에만 집중해요</p><p class="worry-a">남성의 체형과 상황, 라이프스타일에 맞춘 스타일링. 실제 옷을 만져보며 색감, 질감까지 조언받아요.</p></div>
+      <div class="worry-card"><p class="worry-q">디렉터 이력도 궁금하실 텐데요</p><p class="worry-a">유니클로 본사 MD·디자이너, 해외 VIP 자산가를 전담하던 <b>글로벌 프라이빗 쇼퍼 출신</b> 디렉터가 직접 진행해요.</p></div>
+    </div>
+  </section>
+
+  <!-- ===== 7. 전략 (허영이 아니라) ===== -->
+  <section class="whyus" data-reveal>
+    <div class="eyebrow">NOT VANITY</div>
+    <div class="situation-panel">
+      <h3>그냥 멋 부리자는 게 아니라, <br>결과를 바꾸는 전략입니다.</h3>
+      <p>첫인상은 3초에 결정됩니다.</p>
+      <div class="situation-grid">
+        <div class="situation-item"><span>WORK</span><b>직장에서는<br>만만해 보이지 않게</b></div>
+        <div class="situation-item"><span>SOCIAL</span><b>모임에서는<br>다른 남자들 사이에 묻히지 않게</b></div>
+        <div class="situation-item"><span>DATE</span><b>소개팅에서는<br>다시 만나고 싶은 인상으로</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 11. 걱정 해소 (실제 '받기 전 걱정' 저격) ===== -->
+  <section class="whyus" data-reveal style="padding-top:0;">
+    <div class="eyebrow">NO WORRIES</div>
+    <h2 class="sec-title">신청 전, <em>이런 걱정</em> 하시죠?</h2>
+    <p class="sec-sub">후기에서 가장 많이 나온 '받기 전 걱정' 그대로예요.</p>
+    <div class="worry-list">
+      <div class="worry-card"><p class="worry-q"><span class="qmark">Q.</span>성의없이, 뻔한 조언만 하면 어떡하지?</p><p class="worry-a">1:1 전담이라 시간 때우기가 불가능합니다. <b>왜 어울리는지</b>까지 근거로 설명드려서, 뻔한 조언이 아니라 <b>혼자서도 쓸 기준</b>이 남습니다.</p></div>
+      <div class="worry-card"><p class="worry-q"><span class="qmark">Q.</span>추천해준 옷이 나한테 안 어울리면?</p><p class="worry-a">유행이 아니라 <b>체형·얼굴형·피부톤</b> 기준으로 골라 직접 입혀봅니다. 거울 앞에서 확인하고 넘어가니 "어울릴까" 걱정할 일이 없습니다.</p></div>
+      <div class="worry-card"><p class="worry-q"><span class="qmark">Q.</span>결국 옷 강매하는 거 아니야?</p><p class="worry-a"><b>강매는 없습니다.</b> 마음에 들면 그 자리에서 살 수 있고, 안 사도 진단 결과와 나만의 기준은 그대로 남습니다.</p></div>
+      <div class="worry-card"><p class="worry-q"><span class="qmark">Q.</span>나 같은 사람이 가도 뻘쭘하지 않을까?</p><p class="worry-a">타인 시선 없는 <b>프라이빗 룸</b>에서 1:1로 진행합니다. 고객 대부분이 같은 고민의 직장인 남성이라, 아무것도 몰라도 괜찮습니다.</p></div>
+    </div>
+    <p class="sec-sub" style="margin-top:26px;">자주 묻는 것들도 정리해뒀어요.</p>
+    <div class="faq-list">
+      <details class="faq-item"><summary>패션에 완전 문외한인데 괜찮을까요?</summary><p>오히려 그런 분들을 위한 서비스입니다. 기준이 없던 분일수록 변화의 폭이 큽니다. 아무것도 몰라도 디렉터가 처음부터 하나씩 잡아 드립니다.</p></details>
+      <details class="faq-item"><summary>배가 나오고 체형에 자신이 없어도 되나요?</summary><p>리얼미는 처음부터 <b>일반인 체형(배 나온·어깨 좁은·키 작은)</b>을 전제로 시작합니다. 오히려 체형 고민이 있는 분일수록 보완 효과가 큽니다.</p></details>
+      <details class="faq-item"><summary>꼭 잠실 쇼룸에 방문해야 하나요?</summary><p>네. 대면 진단과 직접 입어보는 피팅이 핵심이라 방문이 필요합니다. 100% 사전예약제로 운영되며, 쇼룸 방문이 가능한 분만 신청해주세요.</p></details>
+      <details class="faq-item"><summary>시간은 얼마나 걸리나요?</summary><p>파인딩 플랜은 약 30분, 원데이 플랜은 약 90분 진행됩니다. 원하는 플랜을 선택해 방문하시면 됩니다.</p></details>
+      <details class="faq-item"><summary>첫 방문 50% 혜택은 어떻게 받나요?</summary><p>예약 페이지에서 원하는 플랜을 선택하고 예약금 2만원으로 자리를 확정하시면 50% 혜택이 적용됩니다. 첫 방문 100명 한정이며, 소진되면 예고 없이 종료됩니다.</p></details>
+    </div>
+  </section>
+
+  <!-- ===== 12. 플랜 · 가격 ===== -->
+  <section class="plans-sec" id="plans" data-reveal>
+    <div class="eyebrow">PLAN &amp; PRICE</div>
+    <h2 class="sec-title">지금 신청하면 <em>첫 방문 50%</em></h2>
+    <p class="sec-sub">첫 방문 100명 한정. 파인딩 · 원데이 플랜 중 원하는 곳에 사용할 수 있습니다.</p>
+    <div class="offer" id="offer">
+      <div class="offer-plans">
+        <div class="offer-plan">
+          <div class="op-name">파인딩(Finding) 플랜 <span>30분</span></div>
+          <div class="op-price"><s>150,000원</s> <b>75,000원</b></div>
+          <ul class="op-desc"><li>남에게 보이는 첫인상 평가</li><li>얼굴·체형·분위기 진단</li><li>현재 이미지 진단표 제공</li></ul>
+        </div>
+        <div class="offer-plan hot">
+          <div class="op-badge">파인딩 플랜 포함</div>
+          <div class="op-name">원데이(One-day) 플랜 <span>90분</span></div>
+          <div class="op-price"><s>700,000원</s> <b>350,000원</b></div>
+          <ul class="op-desc"><li>장점·보완점과 구체적인 해결책 제안</li><li>헤어 스타일링과 실제 의상 피팅</li><li>달라진 모습으로 프로필 사진 촬영</li></ul>
+        </div>
+      </div>
+      <div class="combo">
+        <div class="cb-eyebrow">AFTER ONE-DAY</div>
+        <h3>원데이가 끝이 아니에요</h3>
+        <p>원데이를 받고 멤버십으로 이어가면, <b>추가 무료 원데이 디렉팅</b>에<br><b>50만원 상당 제휴 소개팅권</b>까지 드려요.<br>꾸미고, 바로 소개팅까지 — 자세한 건 쇼룸에서 안내드립니다.</p>
+      </div>
+      <div class="offer-availability">첫 방문 100명 한정 · 예약 페이지에서 바로 일정을 확정할 수 있습니다.</div>
+      <a href="https://find-me.real-me.co.kr/realme-booking-A.html?utm_source=story" class="offer-cta js-booking" data-cta="offer">내게 맞는 플랜으로 50% 혜택 예약하기</a>
+      <p class="offer-note"><b>예약까지 완료한 첫 방문 100명에게만 할인 혜택이 적용</b>되며, 100명 마감되면 예고 없이 종료됩니다.</p>
+    </div>
+  </section>
+
+  <!-- ===== 15. 운영 안내 + 최종 CTA ===== -->
+  <section id="apply" class="apply" data-reveal>
+    <div class="eyebrow">RESERVATION</div>
+    <h2 class="sec-title">첫 방문 100명 한정<br> <em>50% 할인</em></h2>
+    <div class="info-table">
+      <div class="info-row"><span>운영 시간</span><b>10:00 ~ 19:00</b></div>
+      <div class="info-row"><span>진행 장소</span><b>잠실 프라이빗 쇼룸</b></div>
+      <div class="info-row"><span>예약 안내</span><b>100% 사전예약제</b></div>
+    </div>
+    <div class="info-notice"><p>리얼미 디렉팅은 <b>잠실 쇼룸 방문</b>으로 진행됩니다.<br>예약 페이지에서 플랜 선택 후 바로 일정을 확정할 수 있습니다.</p></div>
+    <a href="https://find-me.real-me.co.kr/realme-booking-A.html?utm_source=story" class="apply-cta js-booking" data-cta="apply">첫 방문 50% 혜택 예약하기</a>
+    <p class="apply-note">버튼을 누르면 예약 페이지로 이동합니다. 예약금 2만원으로 자리가 확정됩니다.</p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>REAL ME · 남성 이미지 컨설팅</p>
+  <p>상담은 100% 사전예약제로 운영됩니다.</p>
+</footer>
+<div class="sticky-cta" id="stickyCta" role="region" aria-label="첫 방문 50% 혜택 신청 배너">
+  <div class="sticky-cta__inner">
+    <span class="sticky-cta__text">첫 방문 100명 · 50%</span>
+    <a href="https://find-me.real-me.co.kr/realme-booking-A.html?utm_source=story" class="sticky-cta__btn js-booking" id="ctaBtn" data-cta="sticky">지금 예약하기</a>
+  </div>
+</div>
+
+<script src="main.js?v=20260806bk"></script>
+<script>
+(function(){
+  var marks = [25, 50, 75], sent = {};
+  function check(){
+    var h = document.documentElement;
+    var depth = (h.scrollTop + window.innerHeight) / h.scrollHeight * 100;
+    for (var i = 0; i < marks.length; i++) { var m = marks[i];
+      if (!sent[m] && depth >= m) { sent[m] = 1; if (window.gtag) gtag('event', 'scroll_' + m); } }
+  }
+  window.addEventListener('scroll', check, { passive: true });
+})();
+</script>
+</body>
+</html>

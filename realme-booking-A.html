@@ -771,15 +771,21 @@ function validate() {
 document.getElementById('btn-reserve').addEventListener('click', function() {
   if (!validate()) return;
 
-  // ── 전환 이벤트 트래킹 ──
-  if (typeof fbq === 'function') fbq('track', 'InitiateCheckout', { value: 20000, currency: 'KRW' });
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: 'begin_checkout', value: 20000, currency: 'KRW' });
-
   const name  = document.getElementById('input-name').value.trim();
   const age   = document.getElementById('input-age').value.trim();
   const phone = document.getElementById('input-phone').value.trim().replace(/-/g, '');
   const inflow = getInflowChannel();
+  // 스토리(블로그형) 랜딩 경유는 명단 F열에 'story'로 구분 — 쓰레드가 쓰는 기존 find-me와 매출 귀속 분리 (2026-08-06)
+  const utmSrc = (new URLSearchParams(window.location.search).get('utm_source') || '').toLowerCase();
+  const landingId = utmSrc === 'story' ? 'story' : 'landing_a';
+
+  // ── 전환 이벤트 트래킹 ──
+  if (typeof fbq === 'function') fbq('track', 'InitiateCheckout', { value: 20000, currency: 'KRW' });
+  // PaymentClick = 결제 진입(결제창 연 사람). 시크릿 페이지와 동일 명칭 — 리타겟팅 제외 조건이
+  // 양 퍼널을 한 이벤트로 커버하기 위함 (2026-08-06). InitiateCheckout은 페이지마다 의미가 달라 제외용으로 못 씀.
+  if (typeof fbq === 'function') fbq('trackCustom', 'PaymentClick', { value: 20000, currency: 'KRW', landing: landingId });
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: 'begin_checkout', value: 20000, currency: 'KRW' });
 
   const btn = document.getElementById('btn-reserve');
   btn.disabled = true;
@@ -797,7 +803,7 @@ document.getElementById('btn-reserve').addEventListener('click', function() {
         age: age,
         phone: phone,
         inflow_channel: inflow,
-        landing: 'landing_a',
+        landing: landingId,
         consent_privacy: true,
         submitted_at: new Date().toISOString(),
       });
