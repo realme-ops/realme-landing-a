@@ -786,6 +786,9 @@ document.getElementById('btn-reserve').addEventListener('click', function() {
   if (typeof fbq === 'function') fbq('trackCustom', 'PaymentClick', { value: 20000, currency: 'KRW', landing: landingId });
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ event: 'begin_checkout', value: 20000, currency: 'KRW' });
+  // GA4 결제 진입 = begin_checkout으로 통일(시크릿 퍼널과 동일 명칭), landing으로 story/landing_a 구분 (2026-08-10).
+  // 위 dataLayer.push는 GTM 미사용 환경이라 GA4로 전송되지 않음 — gtag 직접 호출이 실제 전송 경로.
+  try { if (typeof gtag === 'function') gtag('event', 'begin_checkout', { currency: 'KRW', value: 20000, landing: landingId }); } catch (e) {}
 
   const btn = document.getElementById('btn-reserve');
   btn.disabled = true;
