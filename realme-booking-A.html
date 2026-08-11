@@ -703,6 +703,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 //   https://<realmeschedule-프로젝트>.supabase.co/functions/v1/create-payment
 const CREATE_PAYMENT_URL = 'https://npjudvehidwjofnmsdos.supabase.co/functions/v1/create-payment-v2';
 
+// ── 스토리 유입 기억 (2026-08-11) ─────────────────────────
+// 첫 방문 때 utm_source=story면 localStorage에 저장 → 파라미터 없는 재방문(북마크·재클릭)도 story로 귀속.
+try { if (new URLSearchParams(location.search).get('utm_source') === 'story') localStorage.setItem('rm_landing', 'story'); } catch (e) {}
+function resolveLanding() {
+  try {
+    if (new URLSearchParams(location.search).get('utm_source') === 'story') return 'story';
+    if (localStorage.getItem('rm_landing') === 'story') return 'story';
+  } catch (e) {}
+  return 'landing_a';
+}
+
 // ── UTM 파라미터 → inflow_channel ──────────────────────────
 // utm이 없을 때(대부분의 경우: utm은 예약페이지까지 전달되지 않음) 리퍼러로 추정:
 // 메인 랜딩 경유 = sns(광고가 주 유입원), 리퍼러 없는 직행 = direct, 그 외 외부 = referral
@@ -775,9 +786,8 @@ document.getElementById('btn-reserve').addEventListener('click', function() {
   const age   = document.getElementById('input-age').value.trim();
   const phone = document.getElementById('input-phone').value.trim().replace(/-/g, '');
   const inflow = getInflowChannel();
-  // 스토리(블로그형) 랜딩 경유는 명단 F열에 'story'로 구분 — 쓰레드가 쓰는 기존 find-me와 매출 귀속 분리 (2026-08-06)
-  const utmSrc = (new URLSearchParams(window.location.search).get('utm_source') || '').toLowerCase();
-  const landingId = utmSrc === 'story' ? 'story' : 'landing_a';
+  // 스토리(블로그형) 랜딩 경유는 명단 F열에 'story'로 구분 — 재방문 귀속은 resolveLanding(localStorage) (2026-08-11)
+  const landingId = resolveLanding();
 
   // ── 전환 이벤트 트래킹 ──
   if (typeof fbq === 'function') fbq('track', 'InitiateCheckout', { value: 20000, currency: 'KRW' });
@@ -786,9 +796,6 @@ document.getElementById('btn-reserve').addEventListener('click', function() {
   if (typeof fbq === 'function') fbq('trackCustom', 'PaymentClick', { value: 20000, currency: 'KRW', landing: landingId });
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ event: 'begin_checkout', value: 20000, currency: 'KRW' });
-  // GA4 결제 진입 = begin_checkout으로 통일(시크릿 퍼널과 동일 명칭), landing으로 story/landing_a 구분 (2026-08-10).
-  // 위 dataLayer.push는 GTM 미사용 환경이라 GA4로 전송되지 않음 — gtag 직접 호출이 실제 전송 경로.
-  try { if (typeof gtag === 'function') gtag('event', 'begin_checkout', { currency: 'KRW', value: 20000, landing: landingId }); } catch (e) {}
 
   const btn = document.getElementById('btn-reserve');
   btn.disabled = true;
@@ -873,8 +880,7 @@ document.getElementById('float-reserve').addEventListener('click', function() {
 (function () {
   var secs = document.querySelectorAll("[data-sec]");
   if (!secs.length || !("IntersectionObserver" in window)) return;
-  var landing = "landing_a";
-  try { if (new URLSearchParams(location.search).get("utm_source") === "story") landing = "story"; } catch (e) {}
+  var landing = resolveLanding(); // story 재방문도 localStorage로 귀속 (2026-08-11)
   var io = new IntersectionObserver(function (es) {
     es.forEach(function (en) {
       if (!en.isIntersecting) return;
