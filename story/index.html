@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<script>
+(function () {
+  // 메타 광고 UTM 매크로 미치환 처리 (2026-08-24)
+  // {{ad.name}} 등이 그대로 들어오는 클릭 = 광고 리다이렉트를 안 탄 자연 유입(게시물 공유·프로필 등).
+  // utm_medium=paid 는 고정 문자열이라 그대로 두면 유료 세션으로 잘못 집계된다.
+  // GA4가 첫 page_view에서 쿼리스트링을 읽기 전에 URL을 바로잡아야 하므로 head 최상단에서 동기 실행.
+  try {
+    var url = new URL(window.location.href);
+    var qs = url.searchParams;
+    var MACRO = /\{\{|%7B%7B/i;
+    var unresolved = [];
+    qs.forEach(function (v, k) {
+      if (MACRO.test(decodeURIComponent(v || ''))) unresolved.push(k);
+    });
+    if (!unresolved.length) return;
+    unresolved.forEach(function (k) { qs.delete(k); });
+    qs.set('utm_source', 'instagram');
+    qs.set('utm_medium', 'social');
+    qs.set('utm_campaign', 'meta_post_unresolved');
+    url.search = qs.toString();
+    window.history.replaceState(null, '', url.toString());
+    window.__utmMacroUnresolved = true;
+    window.__utmMacroFields = unresolved.join(',');
+  } catch (e) { /* 절대 랜딩을 죽이지 않는다 */ }
+})();
+</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>리얼미 · 남성 이미지 컨설팅 — 옷·헤어·피부·체형까지</title>
