@@ -703,22 +703,58 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 //   https://<realmeschedule-프로젝트>.supabase.co/functions/v1/create-payment
 const CREATE_PAYMENT_URL = 'https://npjudvehidwjofnmsdos.supabase.co/functions/v1/create-payment-v2';
 
-// ── 스토리 유입 기억 (2026-08-11) ─────────────────────────
-// 첫 방문 때 utm_source=story면 localStorage에 저장 → 파라미터 없는 재방문(북마크·재클릭)도 story로 귀속.
-try { if (new URLSearchParams(location.search).get('utm_source') === 'story') localStorage.setItem('rm_landing', 'story'); } catch (e) {}
-function resolveLanding() {
+// ── 진입 경로 · UTM 보존 (2026-08-11 최초 / 2026-08-27 개편) ──
+// 예약페이지는 두 경로가 공유한다: /story/(스토리 광고)와 /(메인 = 쓰레드·검색·직접).
+// 같은 도메인 이동이라 document.referrer 에 경로가 그대로 남으므로 그것으로도 가른다.
+// (find-me 메인으로 가던 광고 캠페인은 2026-07-16 이후 전부 OFF → 메인 = 비광고)
+// 랜딩 값은 'story' / 'landing_a' 두 가지를 유지한다 — regen funnel_of 가 이 값으로
+// 퍼널을 가르므로 새 값을 넣으면 자동집계에서 빠진다.
+var RM_ENTRY = (function () {
   try {
-    if (new URLSearchParams(location.search).get('utm_source') === 'story') return 'story';
-    if (localStorage.getItem('rm_landing') === 'story') return 'story';
+    var u = (new URLSearchParams(location.search).get('utm_source') || '').toLowerCase();
+    if (u === 'story') return 'story';
+    var saved = localStorage.getItem('rm_landing');
+    if (saved === 'story' || saved === 'landing_a') return saved;
+    var ref = document.referrer;
+    if (ref) {
+      var r = new URL(ref);
+      if (r.hostname === location.hostname) {
+        return r.pathname.indexOf('/story') === 0 ? 'story' : 'landing_a';
+      }
+    }
   } catch (e) {}
-  return 'landing_a';
+  return '';
+})();
+try { if (RM_ENTRY) localStorage.setItem('rm_landing', RM_ENTRY); } catch (e) {}
+
+// 진입 시점 UTM 보존. 종전에는 /story/ CTA가 utm_source만 넘기고 utm_content(소재)를
+// 버려서 스토리 소재별 성과를 볼 수 없었다. CTA 쪽에서 승계하도록 고쳤고, 여기서는
+// 파라미터 없는 재방문도 살리도록 localStorage에 남긴다.
+var RM_UTM = (function () {
+  var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  var out = {}, got = false;
+  try {
+    var qs = new URLSearchParams(location.search);
+    keys.forEach(function (k) { var v = qs.get(k); if (v) { out[k] = v; got = true; } });
+    if (got) localStorage.setItem('rm_utm', JSON.stringify(out));
+    else {
+      var saved = localStorage.getItem('rm_utm');
+      if (saved) out = JSON.parse(saved) || {};
+    }
+  } catch (e) {}
+  return out;
+})();
+
+function resolveLanding() {
+  return RM_ENTRY || 'landing_a';
 }
 
 // ── UTM 파라미터 → inflow_channel ──────────────────────────
 // utm이 없을 때(대부분의 경우: utm은 예약페이지까지 전달되지 않음) 리퍼러로 추정:
 // 메인 랜딩 경유 = sns(광고가 주 유입원), 리퍼러 없는 직행 = direct, 그 외 외부 = referral
 function getInflowChannel() {
-  const utm = new URLSearchParams(window.location.search).get('utm_source') || '';
+  const utm = (new URLSearchParams(window.location.search).get('utm_source')
+                || RM_UTM.utm_source || '');
   const map = {
     threads: 'threads',
     instagram: 'paid ads', youtube: 'paid ads', facebook: 'paid ads', fb: 'paid ads', ig: 'paid ads', meta: 'paid ads',
@@ -731,7 +767,9 @@ function getInflowChannel() {
   if (!ref) return 'direct';
   try {
     const rh = new URL(ref).hostname;
-    if (rh === window.location.hostname) return 'paid ads';
+    // 같은 호스트 경유는 진입 경로로 가른다. 종전에는 무조건 'paid ads'라서
+    // 쓰레드·검색으로 온 사람이 유료 유입으로 기록됐다 (2026-08-27 교정).
+    if (rh === window.location.hostname) return RM_ENTRY === 'story' ? 'story' : 'findme_main';
     if (rh.indexOf('kakao') !== -1) return 'kakao';
     return 'referral';
   } catch (e) { return 'direct'; }
@@ -814,13 +852,27 @@ document.getElementById('btn-reserve').addEventListener('click', function() {
         phone: phone,
         inflow_channel: inflow,
         landing: landingId,
+        // 소재 귀속용 (2026-08-27). Apps Script 에 대응 열을 추가해야 시트에 기록된다.
+        utm_source: RM_UTM.utm_source || '',
+        utm_medium: RM_UTM.utm_medium || '',
+        utm_campaign: RM_UTM.utm_campaign || '',
+        utm_content: RM_UTM.utm_content || '',
+        utm_term: RM_UTM.utm_term || '',
         consent_privacy: true,
         submitted_at: new Date().toISOString(),
       });
       // sendBeacon은 페이지가 이동(결제창 리다이렉트)해도 전송이 보장된다.
+      // 다만 큐가 가득 차거나 브라우저가 막으면 false 를 조용히 돌려준다 — 종전에는
+      // 반환값을 안 봐서 기입 실패를 아무도 몰랐다(8/7~8/26 GA4 클릭 16 vs 시트 11).
+      // 실패 시 fetch(keepalive)로 한 번 더 시도한다. (2026-08-27)
+      var beaconOk = false;
       if (navigator.sendBeacon) {
-        navigator.sendBeacon(GOOGLE_SHEET_URL, new Blob([payload], { type: 'text/plain' }));
-      } else {
+        try {
+          beaconOk = navigator.sendBeacon(GOOGLE_SHEET_URL,
+                                          new Blob([payload], { type: 'text/plain' }));
+        } catch (e) { beaconOk = false; }
+      }
+      if (!beaconOk) {
         fetch(GOOGLE_SHEET_URL, {
           method: 'POST',
           body: payload,
