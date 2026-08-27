@@ -525,5 +525,29 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
   window.addEventListener('scroll', check, { passive: true });
 })();
 </script>
+
+<script>
+/* 진입 UTM 승계 (2026-08-27)
+   스토리 광고는 utm_content={{ad.name}} 로 소재를 넘기는데, 예약페이지 CTA가 정적 링크라
+   utm_source=story 만 남기고 소재·캠페인 정보를 버렸다. 그 결과 스토리는 소재별 성과를
+   집계할 원천이 아예 없었다. 진입 시점 파라미터를 CTA href 에 얹어 넘긴다.
+   utm_source 는 랜딩 구분자이므로 'story' 를 유지한다. */
+(function () {
+  try {
+    var entry = new URLSearchParams(location.search);
+    var keys = ['utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    var links = document.querySelectorAll('a[href*="realme-booking-A.html"]');
+    for (var i = 0; i < links.length; i++) {
+      var u = new URL(links[i].getAttribute('href'), location.href);
+      u.searchParams.set('utm_source', 'story');
+      for (var j = 0; j < keys.length; j++) {
+        var v = entry.get(keys[j]);
+        if (v && !u.searchParams.get(keys[j])) u.searchParams.set(keys[j], v);
+      }
+      links[i].setAttribute('href', u.toString());
+    }
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
