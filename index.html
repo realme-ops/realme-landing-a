@@ -458,5 +458,28 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
   secs.forEach(function (el) { io.observe(el); });
 })();
 </script>
+
+<script>
+/* 진입 UTM 승계 (2026-08-27)
+   메인 CTA는 상대경로 정적 링크라 진입 UTM이 예약페이지로 전달되지 않았다.
+   쓰레드 게시물 링크에 ?utm_source=threads 를 붙여도 클릭 순간 유실됐다.
+   진입 시점 파라미터를 CTA href 에 그대로 얹어 넘긴다. */
+(function () {
+  try {
+    var entry = new URLSearchParams(location.search);
+    var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    var links = document.querySelectorAll('a[href*="realme-booking-A.html"]');
+    for (var i = 0; i < links.length; i++) {
+      var u = new URL(links[i].getAttribute('href'), location.href);
+      /* 메인은 랜딩 구분자를 강제하지 않는다 — 진입 utm_source(예: threads)를 그대로 승계 */
+      for (var j = 0; j < keys.length; j++) {
+        var v = entry.get(keys[j]);
+        if (v && !u.searchParams.get(keys[j])) u.searchParams.set(keys[j], v);
+      }
+      links[i].setAttribute('href', u.toString());
+    }
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
