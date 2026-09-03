@@ -16,8 +16,8 @@
     depositSeason:  '2만원',
 
     // D2 — 시즌 관리 플랜 가격 및 구성
-    seasonWas:  '60만원',
-    seasonNow:  '30만원',
+    seasonWas:  '',
+    seasonNow:  '100만원 이상',
     seasonTerm: '연 4회 · 시즌별',
 
     // D3 — 오픈 프로모션 마감일 (지나면 취소선 가격/프로모션 문구 제거 필수)
