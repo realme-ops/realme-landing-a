@@ -88,7 +88,8 @@
   function initStickyBar() {
     var bar = document.getElementById('sticky-bar');
     var hero = document.querySelector('.hero');
-    var booking = document.getElementById('booking');
+    // 예약 폼 제거(9/3): CTA가 결제 페이지로 직행 → 푸터에 닿으면 숨김
+    var booking = document.querySelector('footer');
     if (!bar || !hero || !booking) return;
 
     var pastHero = false, atBooking = false;
@@ -120,12 +121,10 @@
         track('cta_click', { position: el.getAttribute('data-cta') });
 
         var plan = el.getAttribute('data-select-plan');
+        if (plan) track('plan_select', { plan: plan });
         if (plan && planSelect) {
           planSelect.value = plan;
           planSelect.dispatchEvent(new Event('change', { bubbles: true }));
-          track('plan_select', { plan: plan });
-          // 폼으로 이동한 뒤 선택된 플랜을 시각적으로 인지시킨다
-          window.setTimeout(function () { planSelect.focus({ preventScroll: true }); }, 400);
         }
       });
     });
@@ -280,7 +279,7 @@
     var sections = [
       ['.hero', 'hero'], ['.stats', 'stats'], ['#benefits', 'benefits'],
       ['#reviews', 'reviews'], ['#pricing', 'pricing'], ['#faq', 'faq'],
-      ['.final-cta', 'final'], ['#booking', 'booking']
+      ['.final-cta', 'final']
     ];
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {

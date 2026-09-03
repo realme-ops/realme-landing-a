@@ -57,7 +57,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
       <a href="#pricing">가격</a>
       <a href="#faq">자주 묻는 질문</a>
     </nav>
-    <a class="btn btn--primary btn--sm nav__cta" href="#booking" data-cta="nav">예약하기</a>
+    <a class="btn btn--primary btn--sm nav__cta" href="/realme-booking-A.html?landing=the-way" data-cta="nav">예약하기</a>
   </div>
 </header>
 
@@ -79,7 +79,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
       </p>
 
       <div class="cta-block">
-        <a class="btn btn--primary btn--lg" href="#booking" data-cta="hero">내 스타일 진단 예약하기</a>
+        <a class="btn btn--primary btn--lg" href="/realme-booking-A.html?landing=the-way" data-cta="hero">내 스타일 진단 예약하기</a>
         <p class="microcopy">예약금은 컨설팅 비용에서 <strong>전액 차감</strong> · 방문 3일 전까지 <strong>전액 환불</strong></p>
       </div>
 
@@ -141,7 +141,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
           그래서 “이게 요즘 유행이에요”가 아니라<br>
           <strong>“당신은 이 길이가 맞습니다”라고 말할 수 있습니다.</strong>
         </p>
-        <a class="btn btn--tertiary" href="#booking" data-cta="benefit1">→ 체형 진단 받아보기</a>
+        <a class="btn btn--tertiary" href="/realme-booking-A.html?landing=the-way" data-cta="benefit1">→ 체형 진단 받아보기</a>
       </div>
       <figure class="feature__media">
         <img src="images/service-1-1.jpg"
@@ -272,7 +272,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
           <li>셀렉션 피팅 (색감·질감, 체형 보완하는 핏 만드는 법)</li>
           <li><strong>내추럴 SNS 프로필 촬영</strong></li>
         </ul>
-        <a class="btn btn--primary btn--block" href="#booking" data-cta="pricing" data-select-plan="oneday">원데이 예약하기</a>
+        <a class="btn btn--primary btn--block" href="/realme-booking-A.html?landing=the-way&plan=oneday" data-cta="pricing" data-select-plan="oneday">원데이 예약하기</a>
       </li>
 
       <li class="plan" data-plan="finding">
@@ -287,7 +287,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
           <li>타인이 보는 나의 이미지 진단 (체형·얼굴형·피부타입 등)</li>
           <li><strong>진단 결과 (PDF) 제공</strong></li>
         </ul>
-        <a class="btn btn--secondary btn--block" href="#booking" data-cta="pricing" data-select-plan="finding">파인딩 예약하기</a>
+        <a class="btn btn--secondary btn--block" href="/realme-booking-A.html?landing=the-way&plan=finding" data-cta="pricing" data-select-plan="finding">파인딩 예약하기</a>
       </li>
 
       <li class="plan" data-plan="season">
@@ -302,7 +302,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
           <li>리얼미 프리미엄 착장 구매 가능</li>
           <li>시즌별 착장 추천 및 이미지 업데이트 관리</li>
         </ul>
-        <a class="btn btn--secondary btn--block" href="#booking" data-cta="pricing" data-select-plan="season">멤버십 문의하기</a>
+        <a class="btn btn--secondary btn--block" href="/realme-booking-A.html?landing=the-way&plan=season" data-cta="pricing" data-select-plan="season">멤버십 문의하기</a>
       </li>
 
     </ul>
@@ -366,70 +366,12 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
     </h2>
     <p class="final-cta__body">90분이면 그 기준이 생깁니다. 그리고 그 기준은 계속 씁니다.</p>
     <div class="cta-block cta-block--center">
-      <a class="btn btn--primary btn--lg" href="#booking" data-cta="final">내 스타일 진단 예약하기</a>
+      <a class="btn btn--primary btn--lg" href="/realme-booking-A.html?landing=the-way" data-cta="final">내 스타일 진단 예약하기</a>
       <p class="microcopy">예약금 전액 차감 · 방문 3일 전까지 전액 환불 · 오픈 프로모션 <span data-field="promoEnd">9월 30일</span>까지</p>
     </div>
   </div>
 </section>
 
-<!-- ============ 예약 폼 ============ -->
-<section class="booking" id="booking" aria-labelledby="booking-head">
-  <div class="wrap wrap--narrow">
-    <header class="section-head">
-      <h2 id="booking-head">예약하기</h2>
-      <p class="section-head__sub">필요한 것만 여쭙니다. 나머지는 현장에서 확인합니다.</p>
-    </header>
-
-    <form class="form" id="booking-form" novalidate>
-      <div class="field">
-        <label class="field__label" for="f-name">이름 <span class="req">필수</span></label>
-        <input class="input" type="text" id="f-name" name="name" autocomplete="name" required placeholder="홍길동">
-        <p class="field__error" data-error-for="f-name" hidden>이름을 입력해주세요.</p>
-      </div>
-
-      <div class="field">
-        <label class="field__label" for="f-phone">휴대폰 번호 <span class="req">필수</span></label>
-        <input class="input" type="tel" id="f-phone" name="phone" inputmode="numeric" autocomplete="tel"
-               required placeholder="01012345678" aria-describedby="f-phone-help">
-        <p class="field__help" id="f-phone-help">예약 확정 문자를 보내드립니다.</p>
-        <p class="field__error" data-error-for="f-phone" hidden>숫자만 10~11자리로 입력해주세요.</p>
-      </div>
-
-      <div class="field">
-        <label class="field__label" for="f-plan">희망 플랜 <span class="req">필수</span></label>
-        <select class="input" id="f-plan" name="plan" required>
-          <option value="">선택해주세요</option>
-          <option value="finding">파인딩 플랜 · 30분 · 75,000원</option>
-          <option value="oneday">원데이 플랜 · 90분 · 350,000원</option>
-          <option value="season">멤버십</option>
-        </select>
-        <p class="field__error" data-error-for="f-plan" hidden>희망 플랜을 선택해주세요.</p>
-      </div>
-
-      <div class="field">
-        <label class="field__label" for="f-message">하고 싶은 말 <span class="opt">선택</span></label>
-        <textarea class="input input--area" id="f-message" name="message" rows="3" placeholder="미리 알려주시면 좋을 내용이 있다면 적어주세요."></textarea>
-      </div>
-
-      <div class="consents">
-        <label class="check">
-          <input type="checkbox" id="f-privacy" name="privacy" required>
-          <span>[필수] 개인정보 수집·이용에 동의합니다. <a href="#privacy">내용 보기</a></span>
-        </label>
-        <p class="field__error" data-error-for="f-privacy" hidden>개인정보 수집·이용 동의가 필요합니다.</p>
-        <label class="check">
-          <input type="checkbox" id="f-marketing" name="marketing">
-          <span>[선택] 시즌 안내 등 마케팅 정보 수신에 동의합니다.</span>
-        </label>
-      </div>
-
-      <button class="btn btn--primary btn--lg btn--block" type="submit">예약금 결제하고 예약 확정하기</button>
-      <p class="microcopy">예약금은 컨설팅 비용에서 전액 차감됩니다. 방문 3일 전까지 전액 환불 가능합니다.</p>
-
-      <p class="form__status" id="form-status" role="status" aria-live="polite" hidden></p>
-    </form>
-  </div>
-</section>
 
 </main>
 
@@ -467,7 +409,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
     <strong>예약금 전액 차감</strong>
     <span>3일 전까지 전액 환불</span>
   </div>
-  <a class="btn btn--primary" href="#booking" data-cta="sticky">예약하기</a>
+  <a class="btn btn--primary" href="/realme-booking-A.html?landing=the-way" data-cta="sticky">예약하기</a>
 </div>
 
 <script src="main.js" defer></script>
