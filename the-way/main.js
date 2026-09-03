@@ -30,7 +30,7 @@
     walkSongpa: '2번 출구 도보 4분',
 
     // 기타 미확정
-    address: '[배포 전 상세 주소 입력]'
+    address: '서울특별시 송파구 방이동 115-4 3층 리얼미'
   };
 
   var PLAN_LABEL = { finding: '파인딩 플랜', oneday: '원데이 플랜', season: '멤버십' };
