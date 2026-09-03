@@ -33,7 +33,7 @@
     address: '[배포 전 상세 주소 입력]'
   };
 
-  var PLAN_LABEL = { finding: '파인딩 플랜', oneday: '원데이 플랜', season: '시즌 관리' };
+  var PLAN_LABEL = { finding: '파인딩 플랜', oneday: '원데이 플랜', season: '멤버십' };
   var PLAN_DEPOSIT = { finding: DATA.depositFinding, oneday: DATA.depositOneday, season: DATA.depositSeason };
 
   /* ---------------------------------------------------------------------
@@ -309,15 +309,7 @@
     if (!form) return;
     var status = document.getElementById('form-status');
     var planSelect = document.getElementById('f-plan');
-    var dateInput = document.getElementById('f-date');
     var started = false;
-
-    // 오늘 이전 날짜 선택 차단
-    if (dateInput) {
-      var t = new Date();
-      var pad = function (n) { return String(n).padStart(2, '0'); };
-      dateInput.min = t.getFullYear() + '-' + pad(t.getMonth() + 1) + '-' + pad(t.getDate());
-    }
 
     // form_start — 첫 입력 시 1회
     form.addEventListener('input', function () {
@@ -351,7 +343,7 @@
       var phoneBad = !(digits.length >= 10 && digits.length <= 11);
       setError('f-phone', phoneBad); if (phoneBad) bad.push(phone);
 
-      ['f-plan', 'f-date', 'f-time'].forEach(function (id) {
+      ['f-plan'].forEach(function (id) {
         var el = document.getElementById(id);
         var isBad = !el.value;
         setError(id, isBad); if (isBad) bad.push(el);
@@ -393,9 +385,6 @@
           name: document.getElementById('f-name').value.trim(),
           phone: document.getElementById('f-phone').value.trim().replace(/\D/g, ''),
           plan: plan,
-          visit_date: document.getElementById('f-date').value,
-          visit_time: document.getElementById('f-time').value,
-          budget: document.getElementById('f-budget').value,
           message: document.getElementById('f-message').value.trim(),
           landing: 'the-way',
           consent_privacy: true,

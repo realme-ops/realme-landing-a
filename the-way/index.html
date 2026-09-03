@@ -258,53 +258,52 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
       <li class="plan plan--best" data-plan="oneday">
         <p class="plan__badge">BEST</p>
         <h3 class="plan__name">원데이 플랜</h3>
-        <p class="plan__define">오늘 안에 다 끝내고 싶다</p>
+        <p class="plan__define">프라이빗 룸에서 1:1 교육 (90분)</p>
         <p class="plan__price">
-          <span class="plan__price-was">70만원</span>
-          <strong class="plan__price-now">35만원</strong>
+          <span class="plan__price-was">700,000원</span>
+          <strong class="plan__price-now">350,000원</strong>
         </p>
-        <p class="plan__meta">소요 시간 90분 · 예약금 <span data-field="depositOneday">2만원</span></p>
+        <p class="plan__meta">예약금 <span data-field="depositOneday">2만원</span></p>
         <ul class="plan__list">
-          <li>파인딩 플랜 전체</li>
-          <li>자체 브랜드 착장</li>
-          <li>코디 구성</li>
-          <li>쇼핑 기준서</li>
-          <li><strong>90분 내 구매까지 완료</strong></li>
+          <li>체형 진단 (어깨·허리·다리 비율로 보완·강조 포인트 파악)</li>
+          <li>얼굴·인상 진단 (얼굴형·눈코입 비율·표정·분위기)</li>
+          <li>헤어·피부 타입 진단 (모질·피부 톤)</li>
+          <li>헤어 스타일링 (얼굴형·모질에 맞는 추천 + 현장 연출)</li>
+          <li>셀렉션 피팅 (색감·질감, 체형 보완하는 핏 만드는 법)</li>
+          <li><strong>내추럴 SNS 프로필 촬영</strong></li>
         </ul>
         <a class="btn btn--primary btn--block" href="#booking" data-cta="pricing" data-select-plan="oneday">원데이 예약하기</a>
-        <p class="plan__note">파인딩으로 시작해도 원데이로 업그레이드하실 수 있습니다.</p>
       </li>
 
       <li class="plan" data-plan="finding">
         <h3 class="plan__name">파인딩 플랜</h3>
-        <p class="plan__define">내 체형부터 알고 싶다</p>
+        <p class="plan__define">프라이빗 룸에서 1:1 진단 (30분)</p>
         <p class="plan__price">
-          <span class="plan__price-was">15만원</span>
-          <strong class="plan__price-now">7만 5천원</strong>
+          <span class="plan__price-was">150,000원</span>
+          <strong class="plan__price-now">75,000원</strong>
         </p>
-        <p class="plan__meta">소요 시간 30분 · 예약금 <span data-field="depositFinding">2만원</span></p>
+        <p class="plan__meta">예약금 <span data-field="depositFinding">2만원</span></p>
         <p class="plan__meta plan__meta--dim">예약금은 모든 플랜 공통 2만원입니다.</p>
         <ul class="plan__list">
-          <li>체형·톤 진단</li>
-          <li>맞는 것 / 피할 것 정리</li>
-          <li><strong>진단 결과지 제공</strong></li>
+          <li>타인이 보는 나의 이미지 진단 (체형·얼굴형·피부타입 등)</li>
+          <li><strong>진단 결과 (PDF) 제공</strong></li>
         </ul>
         <a class="btn btn--secondary btn--block" href="#booking" data-cta="pricing" data-select-plan="finding">파인딩 예약하기</a>
       </li>
 
       <li class="plan" data-plan="season">
-        <h3 class="plan__name">시즌 관리</h3>
-        <p class="plan__define">계속 잘 입고 싶다</p>
+        <h3 class="plan__name">멤버십</h3>
+        <p class="plan__define">시즌마다 이어가는 이미지 관리</p>
         <p class="plan__price">
-          <span class="plan__price-was" data-field="seasonWas"></span>
-          <strong class="plan__price-now" data-field="seasonNow">100만원 이상</strong>
+          <strong class="plan__price-now">1,000,000원~</strong>
         </p>
-        <p class="plan__meta"><span data-field="seasonTerm">연 4회 · 시즌별</span> · 예약금 <span data-field="depositSeason">2만원</span></p>
         <ul class="plan__list">
-          <li>원데이 이력 기반 시즌 추천</li>
-          <li>신상 선별 안내</li>
+          <li>3가지 멤버십 운영 (Essential · Signature · Iconic)</li>
+          <li>원데이 플랜 무료 진행</li>
+          <li>리얼미 프리미엄 착장 구매 가능</li>
+          <li>시즌별 착장 추천 및 이미지 업데이트 관리</li>
         </ul>
-        <a class="btn btn--secondary btn--block" href="#booking" data-cta="pricing" data-select-plan="season">시즌 관리 문의하기</a>
+        <a class="btn btn--secondary btn--block" href="#booking" data-cta="pricing" data-select-plan="season">멤버십 문의하기</a>
       </li>
 
     </ul>
@@ -411,44 +410,11 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
         <label class="field__label" for="f-plan">희망 플랜 <span class="req">필수</span></label>
         <select class="input" id="f-plan" name="plan" required>
           <option value="">선택해주세요</option>
-          <option value="finding">파인딩 플랜 · 30분 · 7만 5천원</option>
-          <option value="oneday">원데이 플랜 · 90분 · 35만원</option>
-          <option value="season">시즌 관리</option>
+          <option value="finding">파인딩 플랜 · 30분 · 75,000원</option>
+          <option value="oneday">원데이 플랜 · 90분 · 350,000원</option>
+          <option value="season">멤버십</option>
         </select>
         <p class="field__error" data-error-for="f-plan" hidden>희망 플랜을 선택해주세요.</p>
-      </div>
-
-      <div class="field-row">
-        <div class="field">
-          <label class="field__label" for="f-date">희망 방문일 <span class="req">필수</span></label>
-          <input class="input" type="date" id="f-date" name="date" required>
-          <p class="field__error" data-error-for="f-date" hidden>방문일을 선택해주세요.</p>
-        </div>
-        <div class="field">
-          <label class="field__label" for="f-time">희망 시간 <span class="req">필수</span></label>
-          <select class="input" id="f-time" name="time" required>
-            <option value="">선택해주세요</option>
-            <option value="11:00">11:00</option>
-            <option value="13:00">13:00</option>
-            <option value="15:00">15:00</option>
-            <option value="17:00">17:00</option>
-            <option value="19:00">19:00</option>
-          </select>
-          <p class="field__help">예약 가능한 슬롯만 노출됩니다.</p>
-          <p class="field__error" data-error-for="f-time" hidden>시간을 선택해주세요.</p>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="field__label" for="f-budget">옷 구매 예산 <span class="opt">선택</span></label>
-        <select class="input" id="f-budget" name="budget">
-          <option value="">선택 안 함</option>
-          <option value="under-50">50만원 미만</option>
-          <option value="50-100">50만~100만원</option>
-          <option value="100-200">100만~200만원</option>
-          <option value="over-200">200만원 이상</option>
-          <option value="undecided">아직 모르겠음</option>
-        </select>
       </div>
 
       <div class="field">
