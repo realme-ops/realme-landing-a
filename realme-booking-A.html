@@ -707,14 +707,18 @@ const CREATE_PAYMENT_URL = 'https://npjudvehidwjofnmsdos.supabase.co/functions/v
 // 예약페이지는 두 경로가 공유한다: /story/(스토리 광고)와 /(메인 = 쓰레드·검색·직접).
 // 같은 도메인 이동이라 document.referrer 에 경로가 그대로 남으므로 그것으로도 가른다.
 // (find-me 메인으로 가던 광고 캠페인은 2026-07-16 이후 전부 OFF → 메인 = 비광고)
-// 랜딩 값은 'story' / 'landing_a' 두 가지를 유지한다 — regen funnel_of 가 이 값으로
-// 퍼널을 가르므로 새 값을 넣으면 자동집계에서 빠진다.
+// 랜딩 값은 'story' / 'landing_a' / 'the-way' 세 가지 — regen funnel_of 가 이 값으로 퍼널을 가른다.
+// 'the-way'(2026-09-03)는 구글 Demand Gen 전용 클린 랜딩(/the-way/)이 ?landing=the-way 로 넘겨준다.
+// 안 태그하면 같은 호스트 리퍼러라 landing_a → regen 이 쓰레드 매출로 오귀속한다.
+// the-way 는 Meta 퍼널이 아니라 funnel_of 가 None(자동집계 제외)을 돌려주는 게 정상.
 var RM_ENTRY = (function () {
   try {
-    var u = (new URLSearchParams(location.search).get('utm_source') || '').toLowerCase();
+    var qs0 = new URLSearchParams(location.search);
+    if (qs0.get('landing') === 'the-way') return 'the-way';
+    var u = (qs0.get('utm_source') || '').toLowerCase();
     if (u === 'story') return 'story';
     var saved = localStorage.getItem('rm_landing');
-    if (saved === 'story' || saved === 'landing_a') return saved;
+    if (saved === 'story' || saved === 'landing_a' || saved === 'the-way') return saved;
     var ref = document.referrer;
     if (ref) {
       var r = new URL(ref);
@@ -769,7 +773,11 @@ function getInflowChannel() {
     const rh = new URL(ref).hostname;
     // 같은 호스트 경유는 진입 경로로 가른다. 종전에는 무조건 'paid ads'라서
     // 쓰레드·검색으로 온 사람이 유료 유입으로 기록됐다 (2026-08-27 교정).
-    if (rh === window.location.hostname) return RM_ENTRY === 'story' ? 'story' : 'findme_main';
+    if (rh === window.location.hostname) {
+      if (RM_ENTRY === 'story') return 'story';
+      if (RM_ENTRY === 'the-way') return 'google';   // the-way 는 구글 DG 전용 랜딩(2026-09-03)
+      return 'findme_main';
+    }
     if (rh.indexOf('kakao') !== -1) return 'kakao';
     return 'referral';
   } catch (e) { return 'direct'; }
