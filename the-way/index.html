@@ -39,7 +39,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="styles.css?v=20260904c">
+<link rel="stylesheet" href="styles.css?v=20260904e">
 <!-- LocalBusiness JSON-LD는 일부러 넣지 않았습니다: 실주소·리뷰 수 등 확인 안 된 값을
      구조화 데이터로 올리면 안 되기 때문입니다. 실제 값 확정되면 추가하세요. -->
 </head>
@@ -90,12 +90,22 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
       </p>
     </div>
 
-    <figure class="hero__media" data-mark="hero_media">
-      <img src="images/look-1.jpg"
-           alt="리얼미에서 스타일 디렉팅을 받은 고객의 착장 사진"
-           width="800" height="1000" fetchpriority="high" decoding="async"
-           onerror="this.closest('figure').style.display='none'">
-      <figcaption class="pin-pill">잠실 스튜디오 · 90분 원데이</figcaption>
+    <!-- 비포/애프터 — 같은 사람. BEFORE = images/before-1.jpg (대표님이 4:5 로 잘라 넣음), AFTER = images/look-1.jpg -->
+    <figure class="hero__media hero__media--pair" data-mark="hero_media">
+      <div class="hero__shot">
+        <img src="images/before-1.jpg"
+             alt="디렉팅 전 모습"
+             width="800" height="1000" fetchpriority="high" decoding="async"
+             onerror="this.closest('.hero__shot').style.display='none'">
+        <span class="pin-pill pin-pill--before">BEFORE</span>
+      </div>
+      <div class="hero__shot">
+        <img src="images/look-1.jpg"
+             alt="디렉팅 후 모습"
+             width="800" height="1000" fetchpriority="high" decoding="async"
+             onerror="this.closest('.hero__shot').style.display='none'">
+        <span class="pin-pill">AFTER</span>
+      </div>
     </figure>
   </div>
 </section>
