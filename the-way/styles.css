@@ -237,6 +237,12 @@ section { padding-block: var(--section); }
   width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
   border-radius: var(--r-lg); background: var(--surface-card);
 }
+/* 2026-09-04: 히어로 비포/애프터 2장 나란히 */
+.hero__media--pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; overflow: visible; border-radius: 0; }
+.hero__shot { position: relative; border-radius: var(--r-lg); overflow: hidden; }
+.hero__shot img { display: block; }
+.hero__shot .pin-pill { left: 10px; bottom: 10px; padding: 6px 10px; font-size: 11px; letter-spacing: .06em; }
+.pin-pill--before { background: var(--ink); color: var(--canvas); }
 
 .rating-line {
   margin-top: var(--s-xl); font-size: 14px; color: var(--mute);
@@ -257,8 +263,9 @@ section { padding-block: var(--section); }
   .hero__text .eyebrow { order: 1; }
   .hero__h1                { order: 2; }
   .hero__body              { order: 3; }
-  .hero__media             { order: 4; margin-top: var(--s-xl); }
-  .hero__text .cta-block   { order: 5; }
+  /* 2026-09-04: 모바일은 CTA 버튼을 이미지보다 위에 — 텍스트 → CTA → 이미지 → 별점 */
+  .hero__text .cta-block   { order: 4; }
+  .hero__media             { order: 5; margin-top: var(--s-xl); }
   .hero__text .rating-line { order: 6; }
   .hero__media img { aspect-ratio: 1 / 1; }
 }
