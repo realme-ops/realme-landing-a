@@ -39,7 +39,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="styles.css?v=20260904e">
+<link rel="stylesheet" href="styles.css?v=20260904f">
 <!-- LocalBusiness JSON-LD는 일부러 넣지 않았습니다: 실주소·리뷰 수 등 확인 안 된 값을
      구조화 데이터로 올리면 안 되기 때문입니다. 실제 값 확정되면 추가하세요. -->
 </head>
@@ -221,10 +221,11 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
 
     <ul class="review-grid">
       <li class="review-card">
-        <img src="images/review-1.jpg"
-             alt="김O훈 고객 후기 사진"
-             width="800" height="600" loading="lazy" decoding="async"
-             onerror="this.style.display='none'">
+        <!-- 비포/애프터 쌍: 저장소 root images/ba-before-N.jpg · ba-after-N.jpg (N=1~9). 숫자 두 곳을 같이 바꿀 것 -->
+        <div class="review-card__pair">
+          <div class="review-card__shot"><img src="../images/ba-before-1.jpg" alt="김O훈 고객 디렉팅 전" width="900" height="1200" loading="lazy" decoding="async" onerror="this.closest('.review-card__pair').style.display='none'"><span class="pin-pill pin-pill--before">BEFORE</span></div>
+          <div class="review-card__shot"><img src="../images/ba-after-1.jpg" alt="김O훈 고객 디렉팅 후" width="900" height="1200" loading="lazy" decoding="async" onerror="this.closest('.review-card__pair').style.display='none'"><span class="pin-pill">AFTER</span></div>
+        </div>
         <div class="review-card__body">
           <p class="review-card__head">“살 때마다 실패했던 돈이 더 컸습니다”</p>
           <p class="review-card__text">시즌마다 새로 사는데 정작 입는 건 세 벌이었어요. 여기서 제 체형에 뭐가 맞는지 알고 나니 살 물건이 줄었습니다.</p>
@@ -232,10 +233,10 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
         </div>
       </li>
       <li class="review-card">
-        <img src="images/review-2.jpg"
-             alt="이O재 고객 후기 사진"
-             width="800" height="600" loading="lazy" decoding="async"
-             onerror="this.style.display='none'">
+        <div class="review-card__pair">
+          <div class="review-card__shot"><img src="../images/ba-before-2.jpg" alt="이O재 고객 디렉팅 전" width="900" height="1200" loading="lazy" decoding="async" onerror="this.closest('.review-card__pair').style.display='none'"><span class="pin-pill pin-pill--before">BEFORE</span></div>
+          <div class="review-card__shot"><img src="../images/ba-after-2.jpg" alt="이O재 고객 디렉팅 후" width="900" height="1200" loading="lazy" decoding="async" onerror="this.closest('.review-card__pair').style.display='none'"><span class="pin-pill">AFTER</span></div>
+        </div>
         <div class="review-card__body">
           <p class="review-card__head">“패션 용어 하나도 몰라도 됐습니다”</p>
           <p class="review-card__text">뭘 물어볼지도 몰라서 걱정했는데, 처음부터 다 정리해서 알려주셨어요. 90분 만에 제가 뭘 사면 안 되는지까지 알게 됐습니다.</p>
@@ -243,10 +244,10 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
         </div>
       </li>
       <li class="review-card">
-        <img src="images/review-3.jpg"
-             alt="박O수 고객 후기 사진"
-             width="800" height="600" loading="lazy" decoding="async"
-             onerror="this.style.display='none'">
+        <div class="review-card__pair">
+          <div class="review-card__shot"><img src="../images/ba-before-3.jpg" alt="박O수 고객 디렉팅 전" width="900" height="1200" loading="lazy" decoding="async" onerror="this.closest('.review-card__pair').style.display='none'"><span class="pin-pill pin-pill--before">BEFORE</span></div>
+          <div class="review-card__shot"><img src="../images/ba-after-3.jpg" alt="박O수 고객 디렉팅 후" width="900" height="1200" loading="lazy" decoding="async" onerror="this.closest('.review-card__pair').style.display='none'"><span class="pin-pill">AFTER</span></div>
+        </div>
         <div class="review-card__body">
           <p class="review-card__head">“어려 보이려는 옷이 아니라 제 나이에 맞는 옷이었습니다”</p>
           <p class="review-card__text">20대 때 입던 걸 계속 입고 있었더라고요. 지금은 회사에서 옷 어디서 사냐는 말을 듣습니다.</p>
