@@ -337,6 +337,11 @@ section { padding-block: var(--section); }
   display: flex; flex-direction: column;
 }
 .review-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+/* 2026-09-04: 후기 카드 사진 → 비포/애프터 2장 나란히 (세로 3:4 두 장 = 카드 폭 3:2) */
+.review-card__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: var(--surface-card); }
+.review-card__shot { position: relative; overflow: hidden; }
+.review-card .review-card__pair img { aspect-ratio: 3 / 4; display: block; }
+.review-card__shot .pin-pill { left: 8px; bottom: 8px; padding: 5px 9px; font-size: 10px; letter-spacing: .06em; }
 .review-card__body { padding: var(--s-xl); display: flex; flex-direction: column; gap: var(--s-md); flex: 1; }
 .review-card__head { font-size: 18px; font-weight: 700; line-height: 1.4; color: var(--ink); }
 .review-card__text { font-size: 14px; color: var(--body); }
