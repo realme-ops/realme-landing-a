@@ -218,8 +218,9 @@ section { padding-block: var(--section); }
    -------------------------------------------------------------------------- */
 .hero { background: var(--surface-soft); padding-block: clamp(32px, 5vw, 80px) var(--section); }
 .hero__grid {
-  display: grid; grid-template-columns: minmax(0,1.06fr) minmax(0,0.94fr);
-  gap: clamp(24px, 4vw, 64px); align-items: center;
+  /* 2026-09-04: 비포/애프터 2장이 들어가면서 이미지 칸을 넓힘 (0.94fr → 1.15fr), 간격 축소 */
+  display: grid; grid-template-columns: minmax(0,0.85fr) minmax(0,1.15fr);
+  gap: clamp(20px, 3vw, 40px); align-items: center;
 }
 .hero__h1 {
   font-size: clamp(1.75rem, 1.05rem + 2.4vw, 2.875rem);
@@ -239,6 +240,7 @@ section { padding-block: var(--section); }
 }
 /* 2026-09-04: 히어로 비포/애프터 2장 나란히 */
 .hero__media--pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; overflow: visible; border-radius: 0; }
+.hero__media--pair img { aspect-ratio: 2 / 3; }   /* 세로로 더 길게 — 히어로 높이를 채움 */
 .hero__shot { position: relative; border-radius: var(--r-lg); overflow: hidden; }
 .hero__shot img { display: block; }
 .hero__shot .pin-pill { left: 10px; bottom: 10px; padding: 6px 10px; font-size: 11px; letter-spacing: .06em; }
@@ -268,6 +270,7 @@ section { padding-block: var(--section); }
   .hero__media             { order: 5; margin-top: var(--s-xl); }
   .hero__text .rating-line { order: 6; }
   .hero__media img { aspect-ratio: 1 / 1; }
+  .hero__media--pair img { aspect-ratio: 3 / 4; }   /* 모바일 비포/애프터는 정사각보다 세로로 길게 */
 }
 
 /* --------------------------------------------------------------------------
