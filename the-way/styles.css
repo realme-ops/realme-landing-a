@@ -227,6 +227,9 @@ section { padding-block: var(--section); }
 }
 .hero__h1 span, .hero__h1 strong { display: block; }
 .hero__h1-line2 { font-weight: 700; }
+/* 2026-09-04: 둘째 줄("여러 사람 만나봐도…")은 가늘고 작게 — 첫 줄 "소개팅보단 디렉팅!"이 주인공. 안의 <b>만 굵게 */
+.hero__h1-line1 { font-weight: 400; font-size: .72em; margin-top: .35em; color: var(--body); }
+.hero__h1-line1 b { font-weight: 700; color: var(--ink); }
 .hero__body { margin-top: var(--s-xl); font-size: clamp(1rem, .95rem + .25vw, 1.125rem); color: var(--body); }
 
 .hero__media { position: relative; border-radius: var(--r-lg); overflow: hidden; }
@@ -242,6 +245,10 @@ section { padding-block: var(--section); }
 .rating-line__stars { color: var(--primary); letter-spacing: .1em; font-size: 15px; }
 .rating-line strong { color: var(--ink); font-weight: 700; }
 .rating-line > * { min-width: 0; }
+/* 2026-09-04: 히어로 신뢰 지표 확대 — 별점·누적 3,000건·재방문율을 본문급으로 키움 */
+.rating-line--lg { font-size: clamp(16px, .9rem + .4vw, 19px); color: var(--body); gap: var(--s-md); }
+.rating-line--lg .rating-line__stars { font-size: clamp(18px, 1rem + .5vw, 22px); }
+.rating-line--lg strong { font-size: 1.35em; }
 
 @media (max-width: 860px) {
   /* 모바일: 텍스트 → 이미지 → CTA 순 (PRD §6.1) */
@@ -378,10 +385,11 @@ section { padding-block: var(--section); }
 .pricing__foot strong { color: var(--charcoal); font-weight: 700; }
 
 @media (min-width: 901px) {
-  /* 데스크톱: 파인딩 → 원데이 → 시즌. 모바일은 DOM 순서(원데이 최상단)를 그대로 쓴다. */
-  .plan[data-plan="finding"] { order: 1; }
-  .plan[data-plan="oneday"]  { order: 2; }
-  .plan[data-plan="season"]  { order: 3; }
+  /* 데스크톱: 파인딩 → 원데이 → 멤버십. 모바일은 DOM 순서(원데이 최상단)를 그대로 쓴다.
+     2026-09-04: 세 번째 카드 data-plan 을 season → membership 으로 바꿈에 따라 선택자도 교체. */
+  .plan[data-plan="finding"]    { order: 1; }
+  .plan[data-plan="oneday"]     { order: 2; }
+  .plan[data-plan="membership"] { order: 3; }
 }
 @media (max-width: 900px) {
   .plan-grid { grid-template-columns: minmax(0,1fr); gap: var(--s-xxl); }
