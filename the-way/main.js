@@ -80,6 +80,12 @@
       referral: 'referral', homepage: 'homepage', kakao: 'kakao'
     };
     if (utm) return map[utm] || utm;          // 모르는 값은 원본 그대로 (새 채널 자동 라벨)
+    // 구글 광고 클릭(gclid / iOS 인앱 gbraid·wbraid)은 utm_source 없이 오고 인앱은 리퍼러도 비어
+    // 'direct'로 찍히므로 먼저 판정 (2026-09-07, impact-me main.js 와 동일 규칙)
+    try {
+      var gq = new URLSearchParams(location.search);
+      if (gq.get('gclid') || gq.get('gbraid') || gq.get('wbraid')) return 'google';
+    } catch (e) {}
     var ref = document.referrer || '';
     if (!ref) return 'direct';
     try {
