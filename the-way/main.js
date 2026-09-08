@@ -84,7 +84,14 @@
     // 'direct'로 찍히므로 먼저 판정 (2026-09-07, impact-me main.js 와 동일 규칙)
     try {
       var gq = new URLSearchParams(location.search);
-      if (gq.get('gclid') || gq.get('gbraid') || gq.get('wbraid')) return 'google';
+      if (gq.get('gclid') || gq.get('gbraid') || gq.get('wbraid')) {
+        // 캠페인명(접미어 utm_campaign)으로 SA / 리마케팅 / DG 구분 (2026-09-08)
+        var gc = String(RM_UTM.utm_campaign || gq.get('utm_campaign') || '').toLowerCase();
+        if (/리마케팅|rmk|remarket|^da_/.test(gc)) return 'google_rmk';
+        if (/^sa_|search/.test(gc)) return 'google_sa';
+        if (/demandgen|^dg_/.test(gc)) return 'google_dg';
+        return 'google';
+      }
     } catch (e) {}
     var ref = document.referrer || '';
     if (!ref) return 'direct';
