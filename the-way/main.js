@@ -106,6 +106,35 @@
   }
 
   // 시트 전송 — sendBeacon 은 페이지 이동(결제창 리다이렉트)에도 전송 보장. 반환값 false 면 fetch 로 재시도.
+  /* ---------------------------------------------------------------------
+     0-b. 예약하기 → 타입폼 (2026-09-10) — the-way 자체 폼(이름·전화·플랜→즉시 예약금 결제)은
+     9/8~9/10 구글 유입 435세션·클릭 30·입력 시작 8명·제출 0 으로 문턱이 너무 높아 접음.
+     impact-me 와 같은 타입폼(NN0cEjOV)으로 보내고, 시트 '유입경로'는 utm_source 로 구분:
+       구글 클릭(gclid/gbraid/wbraid) → utm_campaign 으로 google_sa / google_rmk / google_dg, 그 외는 utm_source 원값 또는 'the-way'.
+     하단 폼 섹션은 숨긴다(코드는 남김 — 되돌릴 때 이 블록과 initCTAs 만 원복).
+     --------------------------------------------------------------------- */
+  var TYPEFORM = 'https://artin1ife.typeform.com/to/NN0cEjOV';
+  var TF_FORWARD = ['utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'fbclid', 'gclid', 'gbraid', 'wbraid'];
+  function googleLabel(camp) {
+    camp = String(camp || '').toLowerCase();
+    if (/리마케팅|rmk|remarket|^da_/.test(camp)) return 'google_rmk';
+    if (/^sa_|search/.test(camp)) return 'google_sa';
+    if (/demandgen|^dg_/.test(camp)) return 'google_dg';
+    return 'google';
+  }
+  function buildTypeformUrl() {
+    var q = new URLSearchParams(location.search), parts = [];
+    var isGoogle = !!(q.get('gclid') || q.get('gbraid') || q.get('wbraid'));
+    var source = isGoogle ? googleLabel(q.get('utm_campaign') || RM_UTM.utm_campaign)
+                          : (RM_UTM.utm_source || q.get('utm_source') || 'the-way');
+    parts.push('utm_source=' + encodeURIComponent(source));
+    TF_FORWARD.forEach(function (k) {
+      var v = q.get(k) || RM_UTM[k];
+      if (v) parts.push(encodeURIComponent(k) + '=' + encodeURIComponent(v));
+    });
+    return TYPEFORM + '?' + parts.join('&');
+  }
+
   function sendLead(obj) {
     try {
       var payload = JSON.stringify(obj);
@@ -164,15 +193,17 @@
      4. CTA 클릭 계측 + 패키지 CTA → 플랜 자동 선택
      --------------------------------------------------------------------- */
   function initCTAs() {
-    var planSelect = document.getElementById('f-plan');
+    // 예약하기(#booking) CTA 전부 → 타입폼. 자체 폼 섹션은 숨김 (2026-09-10, 위 0-b 참조)
+    var tfUrl = buildTypeformUrl();
+    var booking = document.getElementById('booking');
+    if (booking) booking.style.display = 'none';
     document.querySelectorAll('[data-cta]').forEach(function (el) {
+      var toForm = (el.getAttribute('href') || '') === '#booking';
+      if (toForm) el.setAttribute('href', tfUrl);
       el.addEventListener('click', function () {
-        track('cta_click', { position: el.getAttribute('data-cta') });
         var plan = el.getAttribute('data-select-plan');
-        if (plan && planSelect) {
-          planSelect.value = plan;
-          planSelect.dispatchEvent(new Event('change', { bubbles: true }));
-        }
+        track('cta_click', { position: el.getAttribute('data-cta') });
+        if (toForm) track('typeform_open', { position: el.getAttribute('data-cta'), plan: plan || '' });
       });
     });
   }
