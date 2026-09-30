@@ -761,7 +761,8 @@ function getInflowChannel() {
                 || RM_UTM.utm_source || '');
   const map = {
     threads: 'threads',
-    instagram: 'paid ads', youtube: 'paid ads', facebook: 'paid ads', fb: 'paid ads', ig: 'paid ads', meta: 'paid ads',
+    // 2026-09-30: 'paid ads'로 뭉치지 않고 실제 채널 그대로 기록 (landing_A는 프로필·홈 등 공용 페이지라 소스 구분 필요)
+    instagram: 'instagram', ig: 'instagram', meta: 'meta', facebook: 'facebook', fb: 'facebook', youtube: 'youtube',
     blog: 'blog', naver: 'blog', naver_blog: 'blog',
     referral: 'referral', homepage: 'homepage',
     kakao: 'kakao',
@@ -778,6 +779,9 @@ function getInflowChannel() {
       if (RM_ENTRY === 'the-way') return 'google';   // the-way 는 구글 DG 전용 랜딩(2026-09-03)
       return 'findme_main';
     }
+    if (rh === 'real-me.co.kr' || rh === 'www.real-me.co.kr') return 'homepage';   // 홈페이지에서 넘어옴 (2026-09-30)
+    if (rh.indexOf('instagram') !== -1) return 'instagram';
+    if (rh.indexOf('facebook') !== -1) return 'facebook';
     if (rh.indexOf('kakao') !== -1) return 'kakao';
     return 'referral';
   } catch (e) { return 'direct'; }
