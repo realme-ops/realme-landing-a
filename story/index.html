@@ -481,5 +481,73 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
   } catch (e) {}
 })();
 </script>
+<!-- ▼ 광고 캠페인 꼬리표 → 예약금 결제번호 연결 (러버블 인입 대시보드 요청, 2026-10-08) — </body> 바로 전 ▼ -->
+<script>
+(function () {
+  var ENDPOINT = 'https://ztwowgfqatizbjwsbtqs.supabase.co/functions/v1/deposit-utm-capture';
+  var KEY = 'rm_pay_utm', TTL = 7 * 864e5;
+  var KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  var LIVE = /(^|\.)real-me\.co\.kr$/.test(location.hostname);   // 로컬·데모 페이지에서는 서버로 보내지 않음
+  function load() { try { var o = JSON.parse(localStorage.getItem(KEY) || 'null'); if (o && o.ts && Date.now() - o.ts < TTL) return o; } catch (e) {} return null; }
+  function store(o) { try { localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {} }
+  // 1) 링크의 꼬리표를 브라우저에 7일 보관. 새 광고 클릭(utm_campaign 있음)이면 통째로 교체, 아니면 빈 칸만 보충
+  //    — 타입폼→결제 페이지로 넘어올 때 utm_source 가 기존형/신규형 버킷값으로 바뀌어 오므로 랜딩에서 저장한 원값을 지킨다
+  try {
+    var q = new URLSearchParams(location.search), o = {}, has = false;
+    KEYS.forEach(function (k) { var v = q.get(k); if (v) { o[k] = v; has = true; } });
+    if (has) {
+      var prev = load();
+      if (o.utm_campaign || !prev) { o.host = location.hostname; o.landing = location.pathname; o.ts = Date.now(); store(o); }
+      else { KEYS.forEach(function (k) { if (!prev[k] && o[k]) prev[k] = o[k]; }); store(prev); }
+    }
+  } catch (e) {}
+  // 2) 결제번호가 정해지면 그 번호에 꼬리표를 붙여 서버로 (페이지 동작에는 영향 없음)
+  var sent = {};
+  function send(mulNo) {
+    try {
+      if (!mulNo || sent[mulNo] || !LIVE) return;
+      var u = load(); if (!u) return;
+      u = JSON.parse(JSON.stringify(u)); delete u.ts;
+      u.mul_no = String(mulNo);
+      var p = document.querySelector('input[name="phone"], #input-phone, input[type="tel"]');
+      if (p && p.value) u.phone = String(p.value).replace(/\D/g, '');
+      var n = document.querySelector('input[name="name"], #input-name');
+      if (n && n.value) u.name = n.value.trim();
+      u.page = location.pathname;
+      sent[mulNo] = true;
+      var body = new Blob([JSON.stringify(u)], { type: 'text/plain' });
+      if (!(navigator.sendBeacon && navigator.sendBeacon(ENDPOINT, body))) {
+        fetch(ENDPOINT, { method: 'POST', body: body, keepalive: true, mode: 'no-cors' }).catch(function () {});
+      }
+    } catch (e) {}
+  }
+  window.rmSendUtm = send; // 결제번호를 아는 곳에서 직접 호출 가능: rmSendUtm('결제번호')
+  // 3) 결제 생성 요청(create-payment / create-payment-v2) 응답에서 결제번호를 꺼내 전송.
+  //    응답을 다 읽은 뒤에 페이지로 넘겨서, 결제창으로 이동하기 전에 전송이 끝나게 한다.
+  if (window.fetch) {
+    var orig = window.fetch;
+    window.fetch = function () {
+      var url = arguments[0], out = orig.apply(this, arguments);
+      try {
+        var s = typeof url === 'string' ? url : ((url && url.url) || '');
+        if (s.indexOf('create-payment') > -1) {
+          out = out.then(function (r) {
+            return r.clone().json().then(function (j) {
+              try {
+                var m = j && (j.mul_no || j.mulNo || (j.data && (j.data.mul_no || j.data.mulNo)));
+                if (!m && j && j.payurl) { var mm = String(j.payurl).match(/[?&](?:mul_no|mulNo|mulno)=([^&#]+)/i); if (mm) m = decodeURIComponent(mm[1]); }
+                if (m) send(m);
+              } catch (e) {}
+              return r;
+            }, function () { return r; });
+          });
+        }
+      } catch (e) {}
+      return out;
+    };
+  }
+})();
+</script>
+<!-- ▲ 캠페인 꼬리표 끝 ▲ -->
 </body>
 </html>
