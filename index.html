@@ -492,13 +492,17 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
   function store(o) { try { localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {} }
   // 1) 링크의 꼬리표를 브라우저에 7일 보관. 새 광고 클릭(utm_campaign 있음)이면 통째로 교체, 아니면 빈 칸만 보충
   //    — 타입폼→결제 페이지로 넘어올 때 utm_source 가 기존형/신규형 버킷값으로 바뀌어 오므로 랜딩에서 저장한 원값을 지킨다
+  //    랜딩이 utm_source 를 '기존형/신규형/통합형/retarget'(랜딩 버킷)으로 바꿔 넘기므로, 그 값은 채널이 아니라
+  //    landing_variant 로 따로 보내고 채널(utm_source)은 'meta' 로 둔다 — 러버블이 채널을 정해진 목록으로만 받음(10/8 "invalid acquisition_channel: 신규형")
+  var BUCKET = { '기존형': 1, '신규형': 1, '통합형': 1, 'retarget': 1 };
   try {
     var q = new URLSearchParams(location.search), o = {}, has = false;
     KEYS.forEach(function (k) { var v = q.get(k); if (v) { o[k] = v; has = true; } });
+    if (o.utm_source && BUCKET[o.utm_source]) { o.landing_variant = o.utm_source; o.utm_source = 'meta'; }
     if (has) {
       var prev = load();
       if (o.utm_campaign || !prev) { o.host = location.hostname; o.landing = location.pathname; o.ts = Date.now(); store(o); }
-      else { KEYS.forEach(function (k) { if (!prev[k] && o[k]) prev[k] = o[k]; }); store(prev); }
+      else { KEYS.concat(['landing_variant']).forEach(function (k) { if (!prev[k] && o[k]) prev[k] = o[k]; }); store(prev); }
     }
   } catch (e) {}
   // 2) 결제번호가 정해지면 그 번호에 꼬리표를 붙여 서버로 (페이지 동작에는 영향 없음)
