@@ -14,7 +14,7 @@
   /* ★★★ 운영 설정 — 여기만 수정하면 됨 ★★★ */
   var LANDING = 'the-way';                       // 명단 F열 '랜딩' 값 · GA4 landing 파라미터
   // 리드 수집 Apps Script (예약금 신청 명단) — secret-checkout · realme-booking-A 와 같은 웹앱
-  var GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyx44RhfrZcUuwg-d1JThbG6lJ65FWQBPGJO5pvbsouYAxs0ylLJP9Bru4iysfJaZxS/exec';
+  var GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwCJhrGD3qMXXPMhIHUZtUix0eNo_GGTvhcV_s6rdrWsx-AtkUsyDbrN0qYwd3aHR8IpQ/exec';
   // 예약금 결제요청 생성 (realmeschedule Supabase) → PayApp payurl
   var CREATE_PAYMENT_URL = 'https://npjudvehidwjofnmsdos.supabase.co/functions/v1/create-payment-v2';
   var DEPOSIT = 20000;
