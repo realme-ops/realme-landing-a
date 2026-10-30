@@ -283,7 +283,7 @@
 
     var BTN_PAY = '예약금 20,000원 결제하고 예약하기';
     var BTN_INQ = '멤버십 문의 남기기';
-    var MICRO_PAY = '예약금은 컨설팅 비용에서 전액 차감됩니다. 방문 3일 전까지 전액 환불 가능합니다.';
+    var MICRO_PAY = '예약금은 컨설팅 비용에서 전액 차감됩니다. 디렉터 배정 후에는 환불이 어렵습니다.';
     var MICRO_INQ = '멤버십은 예약금이 없습니다. 담당 디렉터가 연락드려 안내합니다.';
 
     // 안내 문구(f-microcopy)·도움말(f-plan-help)은 HTML 에서 지워도 폼이 동작해야 한다 — null 가드 (2026-09-04)
@@ -333,6 +333,11 @@
       var privacy = document.getElementById('f-privacy');
       var privacyBad = !privacy.checked;
       setError('f-privacy', privacyBad); if (privacyBad) bad.push(privacy);
+
+      // 환불 안내 확인 — 예약금이 있는 플랜(원데이·파인딩)만 필수. 멤버십은 예약금 없음 (2026-10-30)
+      var refund = document.getElementById('f-refund');
+      var refundBad = !!refund && planSelect.value !== 'membership' && !refund.checked;
+      setError('f-refund', refundBad); if (refundBad) bad.push(refund);
       return bad;
     }
 
